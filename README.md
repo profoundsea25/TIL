@@ -7,6 +7,8 @@
 #### JPA
 - [FETCH JOIN에 관하여](https://github.com/profoundsea25/TIL/blob/main/JPA/FETCH%20JOIN%EC%97%90%20%EA%B4%80%ED%95%98%EC%97%AC.md)
 
+#### DB
+- [NoSQL이란](https://github.com/profoundsea25/TIL/blob/main/DB/NoSQL%EC%9D%B4%EB%9E%80.md)
 
 #### INFRA
 - [서버리스란](https://github.com/profoundsea25/TIL/blob/main/Infra/%EC%84%9C%EB%B2%84%EB%A6%AC%EC%8A%A4%EB%9E%80.md)
