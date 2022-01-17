@@ -9,8 +9,7 @@
 - [JPQL - 다형성 쿼리](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20%EB%8B%A4%ED%98%95%EC%84%B1%20%EC%BF%BC%EB%A6%AC.md)
 
 #### DB
-- [NoSQL이란](https://github.com/profoundsea25/TIL/blob/main/DB/NoSQL%EC%9D%B4%EB%9E%80.md)
-- [RDBMS란](https://github.com/profoundsea25/TIL/blob/main/DB/RDBMS%EB%9E%80.md)
+- [RDBMS와 NoSQL](https://github.com/profoundsea25/TIL/blob/main/DB/RDBMS%EC%99%80%20NoSQL.md)
 
 #### INFRA
 - [서버리스란](https://github.com/profoundsea25/TIL/blob/main/Infra/%EC%84%9C%EB%B2%84%EB%A6%AC%EC%8A%A4%EB%9E%80.md)
