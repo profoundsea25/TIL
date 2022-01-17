@@ -1,4 +1,4 @@
-# FETCH JOIN에 관하여
+# JPQL - FETCH JOIN에 관하여
 > 김영한님의 [자바 ORM 표준 JPA 프로그래밍 - 기본편](https://www.inflearn.com/course/ORM-JPA-Basic/dashboard) 강의 내용 정리입니다.
 
 #### 페치 조인(Fetch join) [실무에서 자주 사용, 정말 중요]
