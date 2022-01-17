@@ -10,6 +10,7 @@
 
 #### DB
 - [NoSQL이란](https://github.com/profoundsea25/TIL/blob/main/DB/NoSQL%EC%9D%B4%EB%9E%80.md)
+- [RDBMS란](https://github.com/profoundsea25/TIL/blob/main/DB/RDBMS%EB%9E%80.md)
 
 #### INFRA
 - [서버리스란](https://github.com/profoundsea25/TIL/blob/main/Infra/%EC%84%9C%EB%B2%84%EB%A6%AC%EC%8A%A4%EB%9E%80.md)
