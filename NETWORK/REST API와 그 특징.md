@@ -18,7 +18,7 @@ REST : Representational State Transfer, 웹(HTTP)의 장점을 최대한 활용�
 - 따라서 서비스의 자유도가 높아지고 서버에서 불필요한 정보를 관리하지 않음으로써 구현이 단순해짐.
 #### 3) CACHEABLE (캐시 가능)
 - HTTP라는 기존 웹표준을 그대로 사용하기 때문에, 웹에서 사용하는 기존 인프라를 그대로 활용 가능
-- 따라서 HTTP가 가진 캐싱 기능 적용 가능 (HTTP 프로토콜 표준에서 사용하는 `Last-Modified Tag` 혹은 `E-Tag`로 캐싱 쿠현 가능
+- 따라서 HTTP가 가진 캐싱 기능 적용 가능 (HTTP 프로토콜 표준에서 사용하는 `Last-Modified Tag` 혹은 `E-Tag`로 캐싱 구현 가능)
 #### 4) SELF-DESCRIPTIVENESS (자체 표현 구조)
 - REST API 메시지만 보고도 이를 쉽게 이해할 수 있는 자체 표현 구조로 되어있음.
 #### 5) CLIENT - SERVER 구조
