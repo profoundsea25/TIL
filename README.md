@@ -24,3 +24,6 @@
 - [REST API와 그 특징](https://github.com/profoundsea25/TIL/blob/main/NETWORK/REST%20API%EC%99%80%20%EA%B7%B8%20%ED%8A%B9%EC%A7%95.md)
 - [REST API 디자인 가이드](https://github.com/profoundsea25/TIL/blob/main/NETWORK/REST%20API%20%EB%94%94%EC%9E%90%EC%9D%B8%20%EA%B0%80%EC%9D%B4%EB%93%9C.md)
 - [HTTP 응답 상태 코드](https://github.com/profoundsea25/TIL/blob/main/NETWORK/HTTP%20%EC%9D%91%EB%8B%B5%20%EC%83%81%ED%83%9C%20%EC%BD%94%EB%93%9C.md)
+---
+## FOR INTERVIEW
+- [면접 대비 질문 리스트](https://github.com/profoundsea25/TIL/blob/main/%EB%A9%B4%EC%A0%91%EC%A4%80%EB%B9%84/%EB%A9%B4%EC%A0%91%20%EB%8C%80%EB%B9%84%20%EC%A7%88%EB%AC%B8%20%EB%A6%AC%EC%8A%A4%ED%8A%B8.md)
