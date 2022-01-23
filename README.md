@@ -5,6 +5,8 @@
 
 
 ## SPRING
+#### MVC
+- [MVC 패턴](https://github.com/profoundsea25/TIL/blob/main/MVC/MVC%20%ED%8C%A8%ED%84%B4.md)
 #### JPA
 - [JPQL - FETCH JOIN에 관하여](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20FETCH%20JOIN%EC%97%90%20%EA%B4%80%ED%95%98%EC%97%AC.md)
 - [JPQL - 다형성 쿼리](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20%EB%8B%A4%ED%98%95%EC%84%B1%20%EC%BF%BC%EB%A6%AC.md)
