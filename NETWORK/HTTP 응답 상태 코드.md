@@ -6,7 +6,6 @@
 <br>
 
 - 301 : 클라이언트가 요청한 리소스에 대한 URI가 변경 되었을 때
-  - 응답 시 Location header에 변경된 URI를 적으면 그 URI로 REDIRECT 됨  
 <br>
 
 - 400 : 클라이언트의 요청이 부적절한 경우  
