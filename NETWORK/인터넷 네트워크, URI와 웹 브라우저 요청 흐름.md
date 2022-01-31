@@ -1,5 +1,4 @@
-# 모든 개발자를 위한 HTTP 웹 기본 지식
-> 김영한님 강의 요약입니다.
+> 김영한님의 [모든 개발자를 위한 HTTP 웹 기본 지식](https://www.inflearn.com/course/http-%EC%9B%B9-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/dashboard) 강의 요약입니다.
 
 ## 인터넷 네트워크
 ### IP(인터넷 프로토콜)
@@ -66,6 +65,11 @@
   - HTTPS - 443
 
 ### DNS
+- IP는 기억하기 어렵다.
+- IP는 변경될 수 있다.
+- DNS = 도메인 네임 시스템(Domain Name System)
+- 전화번호부
+- 도메인 명을 IP 주소로 변환
 
 ## URI와 웹 브라우저 요청 흐름
 ### URI
