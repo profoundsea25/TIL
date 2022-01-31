@@ -23,11 +23,12 @@
 - [서버리스란](https://github.com/profoundsea25/TIL/blob/main/Infra/%EC%84%9C%EB%B2%84%EB%A6%AC%EC%8A%A4%EB%9E%80.md)
 
 ## NETWORK
-- [모든 개발자를 위한 HTTP 웹 기본 지식](https://github.com/profoundsea25/TIL/blob/main/NETWORK/%EB%AA%A8%EB%93%A0%20%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC%20%EC%9C%84%ED%95%9C%20HTTP%20%EC%9B%B9%20%EA%B8%B0%EB%B3%B8%20%EC%A7%80%EC%8B%9D.md)
 - [REST API와 그 특징](https://github.com/profoundsea25/TIL/blob/main/NETWORK/REST%20API%EC%99%80%20%EA%B7%B8%20%ED%8A%B9%EC%A7%95.md)
 - [REST API 디자인 가이드](https://github.com/profoundsea25/TIL/blob/main/NETWORK/REST%20API%20%EB%94%94%EC%9E%90%EC%9D%B8%20%EA%B0%80%EC%9D%B4%EB%93%9C.md)
 - [HTTP 응답 상태 코드](https://github.com/profoundsea25/TIL/blob/main/NETWORK/HTTP%20%EC%9D%91%EB%8B%B5%20%EC%83%81%ED%83%9C%20%EC%BD%94%EB%93%9C.md)
 - [JWT(JSON Web Token)](https://github.com/profoundsea25/TIL/blob/main/NETWORK/JWT(JSON%20Web%20Token).md)
+#### 모든 개발자를 위한 HTTP 웹 기본 지식
+- [인터넷 네트워크, URI와 웹 브라우저 요청 흐름](https://github.com/profoundsea25/TIL/blob/main/NETWORK/%EC%9D%B8%ED%84%B0%EB%84%B7%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC,%20URI%EC%99%80%20%EC%9B%B9%20%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%20%EC%9A%94%EC%B2%AD%20%ED%9D%90%EB%A6%84.md)
 
 ## OS
 #### 그림으로 쉽게 배우는 운영체제
