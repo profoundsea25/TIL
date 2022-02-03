@@ -40,6 +40,7 @@
 - [섹션 4. 데드락](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%204.%20%EB%8D%B0%EB%93%9C%EB%9D%BD.md)
 - [섹션 5. 쉬어가기](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%205.%20%EC%89%AC%EC%96%B4%EA%B0%80%EA%B8%B0.md)
 - [섹션 6. 메모리](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%206.%20%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
+- [섹션 7. 가상 메모리](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%207.%20%EA%B0%80%EC%83%81%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
 ---
 ## FOR INTERVIEW
 - [면접 대비 질문 리스트](https://github.com/profoundsea25/TIL/blob/main/%EB%A9%B4%EC%A0%91%EC%A4%80%EB%B9%84/%EB%A9%B4%EC%A0%91%20%EB%8C%80%EB%B9%84%20%EC%A7%88%EB%AC%B8%20%EB%A6%AC%EC%8A%A4%ED%8A%B8.md)
