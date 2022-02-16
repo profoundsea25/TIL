@@ -1,6 +1,7 @@
 > 참고자료  
-> https://velog.io/@bsjp400/Database-DB-%EC%A0%95%EA%B7%9C%ED%99%94-%EB%B9%84%EC%A0%95%EA%B7%9C%ED%99%94%EB%9E%80
-> https://3months.tistory.com/193
+> https://velog.io/@bsjp400/Database-DB-%EC%A0%95%EA%B7%9C%ED%99%94-%EB%B9%84%EC%A0%95%EA%B7%9C%ED%99%94%EB%9E%80  
+> https://3months.tistory.com/193  
+> https://mangkyu.tistory.com/110
 
 # DB 정규화
 - 관계형 데이터베이스의 설계에서 중복을 최소화하게 데이터를 구조화하는 프로세스
@@ -41,7 +42,7 @@
 
 ### BCNF (Boyce-Codd Normal Form)
 - 3NF를 만족하면서 모든 결정자가 후보키 집합에 속한 정규형
-- 3NF를 만족하면서 BCNF는 만족하지 않는 경우는? 일반 ㄹ림이 후보키를 결정하는 경우
+- 3NF를 만족하면서 BCNF는 만족하지 않는 경우는? 일반 칼럼이 후보키를 결정하는 경우
 
 ## 정규형의 단점
 - Relation의 분해로 인해 Relation 간의 연산 (JOIN 연산)이 많아져 성능 저하 가능성
