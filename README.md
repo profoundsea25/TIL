@@ -27,6 +27,7 @@
 - [REST API 디자인 가이드](https://github.com/profoundsea25/TIL/blob/main/NETWORK/REST%20API%20%EB%94%94%EC%9E%90%EC%9D%B8%20%EA%B0%80%EC%9D%B4%EB%93%9C.md)
 - [HTTP 응답 상태 코드](https://github.com/profoundsea25/TIL/blob/main/NETWORK/HTTP%20%EC%9D%91%EB%8B%B5%20%EC%83%81%ED%83%9C%20%EC%BD%94%EB%93%9C.md)
 - [JWT(JSON Web Token)](https://github.com/profoundsea25/TIL/blob/main/NETWORK/JWT(JSON%20Web%20Token).md)
+- [동기와 비동기](https://github.com/profoundsea25/TIL/blob/main/NETWORK/%EB%8F%99%EA%B8%B0%EC%99%80%20%EB%B9%84%EB%8F%99%EA%B8%B0.md)
 #### 모든 개발자를 위한 HTTP 웹 기본 지식
 - [인터넷 네트워크, URI와 웹 브라우저 요청 흐름](https://github.com/profoundsea25/TIL/blob/main/NETWORK/%EC%9D%B8%ED%84%B0%EB%84%B7%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC,%20URI%EC%99%80%20%EC%9B%B9%20%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%20%EC%9A%94%EC%B2%AD%20%ED%9D%90%EB%A6%84.md)
 - [HTTP 기본](https://github.com/profoundsea25/TIL/blob/main/NETWORK/HTTP%20%EA%B8%B0%EB%B3%B8.md)
