@@ -19,6 +19,7 @@
 ## DB
 - [RDBMS와 NoSQL](https://github.com/profoundsea25/TIL/blob/main/DB/RDBMS%EC%99%80%20NoSQL.md)
 - [DB 정규화](https://github.com/profoundsea25/TIL/blob/main/DB/DB%20%EC%A0%95%EA%B7%9C%ED%99%94.md)
+- [DB 인덱스](https://github.com/profoundsea25/TIL/blob/main/DB/DB%20%EC%9D%B8%EB%8D%B1%EC%8A%A4.md)
 
 ## INFRA
 - [서버리스란](https://github.com/profoundsea25/TIL/blob/main/Infra/%EC%84%9C%EB%B2%84%EB%A6%AC%EC%8A%A4%EB%9E%80.md)
