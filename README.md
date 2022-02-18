@@ -23,6 +23,7 @@
 
 ## INFRA
 - [서버리스란](https://github.com/profoundsea25/TIL/blob/main/Infra/%EC%84%9C%EB%B2%84%EB%A6%AC%EC%8A%A4%EB%9E%80.md)
+- [Jenkins](https://github.com/profoundsea25/TIL/blob/main/Infra/Jenkins.md)
 
 ## NETWORK
 - [REST API와 그 특징](https://github.com/profoundsea25/TIL/blob/main/NETWORK/REST%20API%EC%99%80%20%EA%B7%B8%20%ED%8A%B9%EC%A7%95.md)
