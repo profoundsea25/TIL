@@ -7,6 +7,7 @@
 ## SPRING
 #### Basics
 - [객체 지향 설계와 스프링](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EA%B0%9D%EC%B2%B4%20%EC%A7%80%ED%96%A5%20%EC%84%A4%EA%B3%84%EC%99%80%20%EC%8A%A4%ED%94%84%EB%A7%81.md)
+- [스프링 핵심 원리 - 기본편 정리](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%95%B5%EC%8B%AC%20%EC%9B%90%EB%A6%AC%20-%20%EA%B8%B0%EB%B3%B8%ED%8E%B8%20%EC%A0%95%EB%A6%AC.md)
 - [@Autowired, @Resource, @Inject의 차이](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%40Autowired%2C%20%40Resource%2C%20%40Inject%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
 #### MVC
 - [MVC 패턴](https://github.com/profoundsea25/TIL/blob/main/MVC/MVC%20%ED%8C%A8%ED%84%B4.md)
