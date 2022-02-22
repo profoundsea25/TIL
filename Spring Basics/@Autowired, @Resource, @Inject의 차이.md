@@ -29,5 +29,3 @@
 - @Autowired와 동일하게 작동하지만 찾는 순서가 다름
 - maven이나 gradle에 javax 라이브러리 의존성을 추가해야 함
 - 필드(멤버 변수), 메서드(setter), 생성자, 일반 메소드에 적용 가능
-
-## @Qualifire
