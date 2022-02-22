@@ -39,6 +39,7 @@
 - [HTTP 메서드와 활용](https://github.com/profoundsea25/TIL/blob/main/NETWORK/HTTP%20%EB%A9%94%EC%84%9C%EB%93%9C%EC%99%80%20%ED%99%9C%EC%9A%A9.md)
 - [HTTP 상태코드](https://github.com/profoundsea25/TIL/blob/main/NETWORK/HTTP%20%EC%83%81%ED%83%9C%EC%BD%94%EB%93%9C.md)
 - [HTTP 헤더1 - 일반 헤더](https://github.com/profoundsea25/TIL/blob/main/NETWORK/HTTP%20%ED%97%A4%EB%8D%941%20-%20%EC%9D%BC%EB%B0%98%20%ED%97%A4%EB%8D%94.md)
+- [HTTP 헤더2 - 캐시와 조건부 요청](https://github.com/profoundsea25/TIL/blob/main/NETWORK/HTTP%20%ED%97%A4%EB%8D%942%20-%20%EC%BA%90%EC%8B%9C%EC%99%80%20%EC%A1%B0%EA%B1%B4%EB%B6%80%20%EC%9A%94%EC%B2%AD.md)
 
 ## OS
 #### 그림으로 쉽게 배우는 운영체제
