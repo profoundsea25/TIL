@@ -83,7 +83,7 @@
   - 4. en;q=0.7
 
 ### 협상과 우선순위 2
-- 구체적인 것이 숸한다.
+- 구체적인 것이 우선한다.
 - 예) Accept: text/\*, text/plain, text/plain;format=flowed, \*/\*
 - 1. text/plain;format=flowed
 - 2. text/plain
