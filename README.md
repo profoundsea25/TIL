@@ -53,6 +53,6 @@
 - [섹션 7. 가상메모리](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%207.%20%EA%B0%80%EC%83%81%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
 - [섹션 8. 입출력 장치](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%208.%20%EC%9E%85%EC%B6%9C%EB%A0%A5%20%EC%9E%A5%EC%B9%98.md)
 - [섹션 9. 파일시스템](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%209.%20%ED%8C%8C%EC%9D%BC%EC%8B%9C%EC%8A%A4%ED%85%9C.md)
----
-## FOR INTERVIEW
-- [면접 대비 질문 리스트](https://github.com/profoundsea25/TIL/blob/main/%EB%A9%B4%EC%A0%91%EC%A4%80%EB%B9%84/%EB%A9%B4%EC%A0%91%20%EB%8C%80%EB%B9%84%20%EC%A7%88%EB%AC%B8%20%EB%A6%AC%EC%8A%A4%ED%8A%B8.md)
+
+## Book
+- [프로그래머의 길, 멘토에게 묻다](https://github.com/profoundsea25/TIL/blob/main/Book/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%9D%98%20%EA%B8%B8%2C%20%EB%A9%98%ED%86%A0%EC%97%90%EA%B2%8C%20%EB%AC%BB%EB%8B%A4.md)
