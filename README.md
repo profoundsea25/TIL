@@ -10,6 +10,7 @@
 - [스프링 핵심 원리 - 기본편 정리](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%95%B5%EC%8B%AC%20%EC%9B%90%EB%A6%AC%20-%20%EA%B8%B0%EB%B3%B8%ED%8E%B8%20%EC%A0%95%EB%A6%AC.md)
 #### 자바 ORM 표준 JPA 프로그래밍 - 기본편
 - [01. JPA 소개](https://github.com/profoundsea25/TIL/blob/main/JPA/01.%20JPA%20%EC%86%8C%EA%B0%9C.md)
+- [02. JPA 시작](https://github.com/profoundsea25/TIL/blob/main/JPA/02.%20JPA%20%EC%8B%9C%EC%9E%91.md)
 - [JPQL - FETCH JOIN에 관하여](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20FETCH%20JOIN%EC%97%90%20%EA%B4%80%ED%95%98%EC%97%AC.md)
 - [JPQL - 다형성 쿼리](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20%EB%8B%A4%ED%98%95%EC%84%B1%20%EC%BF%BC%EB%A6%AC.md)
 - [JPQL - 엔티티 직접 사용](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20%EC%97%94%ED%8B%B0%ED%8B%B0%20%EC%A7%81%EC%A0%91%20%EC%82%AC%EC%9A%A9.md)
