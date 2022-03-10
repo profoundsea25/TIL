@@ -26,6 +26,8 @@
 - [JPQL - 벌크 연산](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20%EB%B2%8C%ED%81%AC%20%EC%97%B0%EC%82%B0.md)
 #### 실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발
 - [실전! 스프링 부트와 JPA 활용 1 정리](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%EC%99%80%20JPA%20%ED%99%9C%EC%9A%A9%201%20%EC%A0%95%EB%A6%AC.md)
+#### 스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술
+#### 스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
 #### Basics
 - [MVC 패턴](https://github.com/profoundsea25/TIL/blob/main/MVC/MVC%20%ED%8C%A8%ED%84%B4.md)
 - [@Autowired, @Resource, @Inject의 차이](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%40Autowired%2C%20%40Resource%2C%20%40Inject%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
