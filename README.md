@@ -28,7 +28,7 @@
 - [실전! 스프링 부트와 JPA 활용 1 정리](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%EC%99%80%20JPA%20%ED%99%9C%EC%9A%A9%201%20%EC%A0%95%EB%A6%AC.md)
 #### 스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술
 #### 스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
-- [스프링 MVC 2편 - 백엔드 웹 개발 활용 기술 정리](https://github.com/profoundsea25/TIL/blob/main/MVC/%EC%8A%A4%ED%94%84%EB%A7%81%20MVC%202%ED%8E%B8%20-%20%EB%B0%B1%EC%97%94%EB%93%9C%20%EC%9B%B9%20%EA%B0%9C%EB%B0%9C%20%ED%99%9C%EC%9A%A9%20%EA%B8%B0%EC%88%A0%20%EC%A0%95%EB%A6%AC.md)
+- [1. 타임리프 - 기본 기능](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/1.%20%ED%83%80%EC%9E%84%EB%A6%AC%ED%94%84%20-%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5.md)
 #### Basics
 - [MVC 패턴](https://github.com/profoundsea25/TIL/blob/main/MVC/MVC%20%ED%8C%A8%ED%84%B4.md)
 - [@Autowired, @Resource, @Inject의 차이](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%40Autowired%2C%20%40Resource%2C%20%40Inject%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
