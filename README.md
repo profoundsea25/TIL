@@ -27,6 +27,7 @@
 #### 실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발
 - [실전! 스프링 부트와 JPA 활용 1 정리](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%EC%99%80%20JPA%20%ED%99%9C%EC%9A%A9%201%20%EC%A0%95%EB%A6%AC.md)
 #### 스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술
+- [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술 정리](https://github.com/profoundsea25/TIL/blob/main/MVC/%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%86%BC%20MVC%201%E1%84%91%E1%85%A7%E1%86%AB%20-%20%E1%84%87%E1%85%A2%E1%86%A8%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3%20%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%92%E1%85%A2%E1%86%A8%E1%84%89%E1%85%B5%E1%86%B7%20%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF%20%EC%A0%95%EB%A6%AC.md)
 #### 스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
 - [1. 타임리프 - 기본 기능](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/1.%20%ED%83%80%EC%9E%84%EB%A6%AC%ED%94%84%20-%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5.md)
 - [4. 검증1 - Validation](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/4.%20%EA%B2%80%EC%A6%9D1%20-%20Validation.md)
