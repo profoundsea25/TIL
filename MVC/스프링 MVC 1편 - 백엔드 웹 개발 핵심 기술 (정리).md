@@ -245,7 +245,7 @@ dispatcher.forward(request, reponse);
 - 좋은 프레임워크는 아키텍처도 중요하지만, 그와 더불어 실제 개발하는 개발자가 단순하고 편리하게 사용할 수 있어야 한다. 실용성이 있어야 한다.
 - 컨트롤러가 `ModelView` 대신에 `ViewName`만 반환하도록 설계
 
-### 유연한 컨트롤러1 - v5
+### 유연한 컨트롤러 - v5
 #### 어댑터 패턴
 - 어댑터 패턴을 사용해서 프론트 컨트롤러가 다양한 방식의 컨트롤러를 처리할 수 있도록 할 수 있다.
 - 서블릿이 다양한 컨트롤러 인터페이스를 사용할 수 있도록 변경
@@ -254,4 +254,94 @@ dispatcher.forward(request, reponse);
 #### 핸들러
 - 컨트롤러를 추상화한 것.
 - 어댑터가 있기 때문에 꼭 컨트롤러의 개념 뿐만아니라 어떤 것이든 해당하는 종류의 어댑터만 있으면 다 처리할 수 있기 때문
-- 99~
+
+# 스프링 MVC - 구조 이해
+### DispatcherServlet 구조 살펴보기
+- 스프링 MVC도 프론트 컨트롤러 패턴으로 구현되어 있다.
+- 스프링 MVC의 프론트 컨트롤러가 `DispatcherServlet`
+- 스프링 부트는 `DistpatcherServlet`을 서블릿으로 자동으로 등록하면서 모든 경로에 대해서 매핑한다.
+  - 더 자세한 경로가 우선순위가 높다. 그래서 기존에 등록한 서블릿도 함께 동작한다.
+
+### 요청 흐름
+- 서블릿이 호출되면 `HttpServlet`이 제공하는 `service()`가 호출된다.
+- 스프링 MVC는 `DispatcherServlet`의 부모인 `FrameworkServlet`에서 `service()`를 오버라이드해둔 상태에서,
+- `FramewordServlet.service()`를 시작으로 여러 메서드가 호출되면서 `DispatcherServlet.doDispatcher()`가 호출된다.
+
+### DispatcherServlet.doDispatch() 코드 분석
+```
+protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    HttpServletRequest processedRequest = request;
+    HandlerExecutionChain mappedHandler = null;
+    ModelAndView mv = null;
+
+    // 1. 핸들러 조회
+    mappedHandler = getHandler(processedRequest);
+    if (mappedHandler == null) {
+        noHandlerFound(processedRequest, response);
+        return;
+    }
+
+    // 2. 핸들러 어댑터 조회 - 핸들러를 처리할 수 있는 어댑터
+    HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
+
+    // 3. 핸들러 어댑터 실행 -> 4. 핸들러 어댑터를 통해 핸들러 실행 -> 5. ModelAndView 반환
+    mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
+
+    processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);
+}
+
+
+private void processDispatchResult(HttpServletRequest request, HttpServletResponse response, 
+                                   HandlerExecutionChain mappedHandler, ModelAndView mv, 
+                                   Exception exception) throws Exception {
+    // 뷰 렌더링 호출
+    render(mv, request, response);
+} 
+
+
+protected void render(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    View view;
+    String viewName = mv.getViewName();
+
+    // 6. 뷰 리졸버를 통해서 뷰 찾기, 7. View 반환
+    view = resolveViewName(viewName, mv.getModelInternal(), locale, request);
+
+    // 8. 뷰 렌더링
+    view.render(mv.getModelInternal(), request, response);
+}
+```
+
+### SpringMVC 동작 순서
+1. 핸들러 조회 : 핸들러 매핑을 통해 요청 URL에 매핑된 핸들러(컨트롤러)를 조회한다.
+2. 핸들러 어댑터 조회 : 핸들러를 실행할 수 있는 핸들러 어댑터를 조회한다.
+3. 핸들러 어댑터 실행 : 핸들러 어댑터를 실행한다.
+4. 핸들러 실행 : 핸들러 어댑터가 실제 핸들러를 실행한다.
+5. ModelAndView 반환 : 핸들러 어댑터는 핸들러가 반환하는 정보를 ModelAndView로 변환해서 반환한다.
+6. viewResolver 호출 : 뷰 리졸버를 찾고 실행한다.
+7. View 반환 : 뷰 리졸버는 뷰의 논리 이름을 물리 이름으로 바꾸고, 렌더링 역할을 담당하는 뷰 객체를 반환한다.
+8. 뷰 렌더링 : 뷰를 통해서 뷰를 렌더링한다.
+
+### 스프링 MVC - 시작하기
+- `@Controller`
+  - 스프링이 자동으로 스프링 빈으로 등록한다. 내부에 `@Component`어노테이션이 있어 컴포넌트 스캔의 대상이 된다.
+  - 스프링 MVC에서 어노테이션 기반 컨트롤러로 인식한다. 
+- `@ReqeustMapping`
+  - 요청 정보를 매핑한다. 해당 URL이 오출되면 이 메서드가 호출된다.
+  - 어노테이션을 기반으로 동작하기 때문에 메서드의 이름은 임의로 지으면 된다.
+  - 우선순위가 가장 높은 핸들러 매핑과 핸들러 어댑터는 `RequestmappingHandlerMapping`, `RequestMappingHandlerAdapter`
+  - 실무에서 99.9% 이 방식의 컨트롤러 사용
+- `ModelAndView`
+  - 모델과 뷰의 정보를 담아서 반환하면 된다.
+- `RequestMappingHandlerMapping`은 스프링 빈 중에서 `@RequestMapping` 또는 `@Controller`가 클래스 레벨에 붙어 있는 경웨 매핑 정보로 인식한다.
+
+### 스프링 MVC - 실용적인 방식
+- 소스코드에서 V3 방식이 실무에서 주로 사용하는 방식
+- 메서드마다 Model 파라미터를 편하게 받을 수 있다.
+- ViewName(뷰의 논리 이름) 직접 반환
+- `@RequestParam` 사용
+  - 스프링은 HTTP 요청 파라미터를 `@RequestParam`으로 받을 수 있다.
+  - GET 쿼리 파라미터, POST Form 방식을 모두 지원
+- `@RequestMapping` -> `@GetMapping`, `@PostMapping`
+  - `@RequestMapping`은 URL만 매칭하는 것이 아니라, HTTP Method도 함께 구분할 수 있다.
