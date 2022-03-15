@@ -255,7 +255,7 @@ dispatcher.forward(request, reponse);
 - 컨트롤러를 추상화한 것.
 - 어댑터가 있기 때문에 꼭 컨트롤러의 개념 뿐만아니라 어떤 것이든 해당하는 종류의 어댑터만 있으면 다 처리할 수 있기 때문
 
-# 스프링 MVC - 구조 이해
+# 5. 스프링 MVC - 구조 이해
 ### DispatcherServlet 구조 살펴보기
 - 스프링 MVC도 프론트 컨트롤러 패턴으로 구현되어 있다.
 - 스프링 MVC의 프론트 컨트롤러가 `DispatcherServlet`
@@ -345,3 +345,5 @@ protected void render(ModelAndView mv, HttpServletRequest request, HttpServletRe
   - GET 쿼리 파라미터, POST Form 방식을 모두 지원
 - `@RequestMapping` -> `@GetMapping`, `@PostMapping`
   - `@RequestMapping`은 URL만 매칭하는 것이 아니라, HTTP Method도 함께 구분할 수 있다.
+
+# 6. 스프링 MVC - 기본 기능
