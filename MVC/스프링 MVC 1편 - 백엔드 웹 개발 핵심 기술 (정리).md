@@ -347,3 +347,59 @@ protected void render(ModelAndView mv, HttpServletRequest request, HttpServletRe
   - `@RequestMapping`은 URL만 매칭하는 것이 아니라, HTTP Method도 함께 구분할 수 있다.
 
 # 6. 스프링 MVC - 기본 기능
+### 매핑 정보
+- `@Controller`는 반환값이 String이면 뷰 이름으로 인식된다. 그래서 뷰를 찾고 뷰가 렌더링 된다.
+- `@RestControlelr`는 반환 값으로 뷰를 찾는 것이 아니라, HTTP 메시지 바디에 바로 입력한다. 따라서 실행 결과로 ok 메세지를 받을 수 있다. `@ResponseBody`와 관련있다.
+- `@RequestMapping("/~")`은 /~ URL이 호출되면 이 메서드가 실행되도록 매핑한다. 대부분의 속성을 배열[]로 제공하므로 다중 설정이 가능하다.
+  - HTTP 메서드를 지정하지 않으면 HTTP 메서드와 무관하게 호출된다. 즉 GET, HEAD, POST, PUT, PATCh, DELETE 모두 허용한다.
+  - 허용한 메서드 이외의 메서드를 지정하면 HTTP 405 상태코드(Method Not Allowed)를 반환한다.
+  - 경로 변수의 경우 최근 HTTP API는 리소스 경로에 식별자를 넣는 스타일을 선호한다.
+  - `@PathVariable`의 이름과 파라미터 이름이 같으면 생략할 수 있다.
+  - ContentType 헤더를 기반으로 미디어 타입 조건 매핑을 할 수 있으며, 만약 지정한 미디어 타입과 맞지 않은 요청이 들어오면 HTTP 415 상태코드(Unsupported Media Type)을 반환한다.
+  - Accept 헤더 기반으로 미디어 타입을 매핑할 수 있으며, 만약 지정한 타입과 맞지 않은 요청이 들어오면 HTTP 406 상태코드(Not Acceptable)을 반환한다.
+  - `@RequestParam`을 경우에 따라 생략할 수도 있는데, 너무나 많이 생략하는 감이 있어 명확하게 요청 파라미터에서 데이터를 읽는다는 것을 명시해주는 것이 좋다.
+
+
+#### 로그 레벨
+- LEVEL : TRACE > DEBUG > INFO > WARN > ERROR
+
+### 로그 사용의 장점
+- 쓰레드 정보, 클래스 이름 같은 부가 정보를 함께 볼 수 있고, 출력 모양을 조정할 수 있다.
+- 로그 레벨에 따라 개발 서버에서는 모든 로그를 출력하고, 운영서버에서는 출력하지 않는 등 로그를 상황에 맞게 조절할 수 있다.
+- 시스템 아웃 콘솔에만 출력하는 것이 아니라, 파일이나 네트워크 등, 로그를 별도의 위치에 남길 수 있다. 특히 파일로 남길 때는 일별, 특정 용량에 따라 로그를 분할하는 것도 가능하다.
+- 성능도 일반 System.out 보다 좋다. (내부 버퍼링, 멀티쓰레드 등) 그래서 실무에서는 꼭 로그를 사용해야 한다.
+
+### @ModelAttribute
+- 스프링MVC는 `@ModelAttribute`가 있으면 다음을 실행한다.
+- `@ModelAttribute`뒤의 객체를 생성한다.
+- 요청 파라미터 이름으로 해당 객체의 프로퍼티를 찾는다. 그리고 해당 프로퍼티의 setter를 호출해서 파라미터의 값을 입력(바인딩)한다.
+  - 예) 파라미터 이름이 username이면 setUsername()메서드를 찾아서 호출하면서 값을 입력한다.
+
+### HTTP 요청 메시지 - 단순 텍스트
+- 요청 파라미터와 다르게, HTTP 메시지 바디를 통해 데이터가 넘어오는 경우는 `@RequestParam`, `@ModelAttribute`를 사용할 수 없다.
+  - 물론 HTML Form 형식으로 전달되는 경우는 요청 파라미터로 인정된다.
+- HTTP 메시지 바디의 데이터를 `InputStream`을 사용해서 직접 읽을 수 있다.
+- `HttpEntity`를 상속받은 다음 객체들도 같은 기능을 제공한다.
+  - `RequestEntity` : HttpMethod, url 정보가 추가됨, 요청에서 사용
+  - `ResponseEntity` : HTTP 상태 코드 설정 가능, 응답에서 사용
+- `@RequestBody`
+  - HTTP 메시지 바디 정보를 편리하게 조회라 수 있다.
+  - 참고로 헤더 정보가 필요하다면 `HttpEntity`를 사용하거나 `@RequestHeader`를 사용
+  - 요청 파라미터를 조회하는 `@RequestParam`이나 `@ModelAttribute`와는 관계 없음
+- 요청 파라미터 vs HTTP 메시지 바디
+  - 요청 파라미터를 조회하는 기능 : `@RequestParam`, `@ModelAttribute`
+  - HTTP 메시지 바디를 직접 조회하는 기능 : `@RequestBody`
+- `@ResponseBody`
+  - 응답 결과를 HTTP 메시지 바디에 직접 담아서 전달할 수 있으며, view를 사용하지 않음
+
+### HTTP 요청 메시지 - JSON
+- HttpServletReqeust를 사용해서 직접 HTTP 메시지 바디에서 데이터를 읽어와서, 문자로 변환한다.
+- 문자로 된 JSON 데이터를 Jackson 라이브러리인 `objectMapper`를 사용해서 자바 객체로 변환한다.
+- `@RequestBody`는 생략 불가능 (생략하면 `@ModelAttribute` 적용)
+- 스프링은 `@ModelAttribute`, `@RequestParam` 해당 생략시 다음과 같은 규칙을 적용한다.
+  - String, int, Integer 같은 단순 타입 = `@RequestParam`
+  - 나머지 = `@ModelAttribute`(argument resolver로 지정해둔 타입 외)
+- `@RequestBody` 요청 : JSON 요청 -> HTTP 메시지 컨버터 -> 객체
+- `@ResponseBody` 응답 : 객체 -> HTTP 메시지 컨버터 -> JSON 응답
+
+168~
