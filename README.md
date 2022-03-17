@@ -7,7 +7,7 @@
 ## SPRING
 #### 스프링 핵심 원리 - 기본편
 - [객체 지향 설계와 스프링](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EA%B0%9D%EC%B2%B4%20%EC%A7%80%ED%96%A5%20%EC%84%A4%EA%B3%84%EC%99%80%20%EC%8A%A4%ED%94%84%EB%A7%81.md)
-- [스프링 핵심 원리 - 기본편 정리](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%95%B5%EC%8B%AC%20%EC%9B%90%EB%A6%AC%20-%20%EA%B8%B0%EB%B3%B8%ED%8E%B8%20%EC%A0%95%EB%A6%AC.md)
+- [스프링 핵심 원리 - 기본편 (정리)](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%95%B5%EC%8B%AC%20%EC%9B%90%EB%A6%AC%20-%20%EA%B8%B0%EB%B3%B8%ED%8E%B8%20%EC%A0%95%EB%A6%AC.md)
 #### 자바 ORM 표준 JPA 프로그래밍 - 기본편
 - [01. JPA 소개](https://github.com/profoundsea25/TIL/blob/main/JPA/01.%20JPA%20%EC%86%8C%EA%B0%9C.md)
 - [02. JPA 시작](https://github.com/profoundsea25/TIL/blob/main/JPA/02.%20JPA%20%EC%8B%9C%EC%9E%91.md)
@@ -25,7 +25,7 @@
 - [JPQL - Named 쿼리](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20Named%20%EC%BF%BC%EB%A6%AC.md)
 - [JPQL - 벌크 연산](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20%EB%B2%8C%ED%81%AC%20%EC%97%B0%EC%82%B0.md)
 #### 실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발
-- [실전! 스프링 부트와 JPA 활용 1 정리](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%EC%99%80%20JPA%20%ED%99%9C%EC%9A%A9%201%20%EC%A0%95%EB%A6%AC.md)
+- [실전! 스프링 부트와 JPA 활용 1 (정리)](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%EC%99%80%20JPA%20%ED%99%9C%EC%9A%A9%201%20%EC%A0%95%EB%A6%AC.md)
 #### 스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술
 - [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술 (정리)](https://github.com/profoundsea25/TIL/blob/main/MVC/%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%86%BC%20MVC%201%E1%84%91%E1%85%A7%E1%86%AB%20-%20%E1%84%87%E1%85%A2%E1%86%A8%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3%20%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%92%E1%85%A2%E1%86%A8%E1%84%89%E1%85%B5%E1%86%B7%20%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF%20(%EC%A0%95%EB%A6%AC).md)
 #### 스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
