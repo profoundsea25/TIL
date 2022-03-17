@@ -402,4 +402,45 @@ protected void render(ModelAndView mv, HttpServletRequest request, HttpServletRe
 - `@RequestBody` 요청 : JSON 요청 -> HTTP 메시지 컨버터 -> 객체
 - `@ResponseBody` 응답 : 객체 -> HTTP 메시지 컨버터 -> JSON 응답
 
-168~
+### HTTP 응답 - 정적 리소스, 뷰 템플릿
+- 스프링(서버)에서 응답 데이터를 만드는 방법은 크게 3가지
+  - 정적 리소스
+  - 뷰 템플릿 사용 (동적 HTML)
+  - HTTP 메시지 사용 (HTTP 메시지 바디에 JSON 같은 형식으로 데이터 송신)
+
+#### 정적 리소스
+- 스프링 부트는 클래스패스의 다음 디렉토리에 있는 정적 리소스를 제공
+  - `/static`, `/public`, `/resources`, `/META-INF/resources`
+- 리소스 보관장소 : `src/main/resources`
+- 정적 리소스 경로 : `src/main/resources/static`
+  - 정적 리소스는 해당 파일을 변경 없이 그대로 서비스한다.
+
+#### 뷰 템플릿
+- 뷰 템플릿을 거쳐서 HTML이 생성되고, 뷰가 응답을 만들어서 전달
+- 스프링부트 기본 뷰 템플릿 경로 `src/main/resources/templates`
+- String을 반환하는 경우 - View or HTTP 메시지
+- `@ResponseBody`, `HttpEntity`를 사용하면 HTTP 메시지 바디에 직접 응답 데이터 출력 가능
+
+### HTTP 응답 - HTTP API, 메시지 바디에 직접 입력
+- `@RestController` 어노테이션 사용시, 해당 컨트롤러에 모두 `@ResponseBody`가 적용된다.
+
+### HTTP 메시지 컨버터 
+#### HTTP 요청 데이터 읽기
+- HTTP 요청이 오고 컨트롤러에서 `@RequestBody`, `HttpEntity` 파라미터 사용
+- 메시지 컨버터가 메시지를 읽을수 있는지 확인하기 위해 `canRead()`를 호출
+  - 대상 클래스 타입을 지원하는지
+  - HTTP 요청의 Content-Type 미디어 타입을 지원하는지
+- `canRead()` 조건을 만족하면 `read()`를 호출해서 객체를 생성하고 반환한다.
+
+#### HTTP 응답 데이터 생성
+- 컨트롤러에서 `@ResponseBody`, `HttpEntity`로 값이 반환된다.
+- 메시지 컨버터가 메시지를 쓸 수 있는지를 확인하기 위해 `canWrite()`를 호출한다.
+  - 대상 클래스 타입을 지원하는가
+  - HTTP 요청의 Accept 미디어 타입을 지원하는가
+- `canWrite()` 조건을 만족하면 `write()`를 호출해서 HTTP 응답 메시지 바디에 데이털르 생성한다.
+
+### 요청 매핑 핸들러 어댑터 구조
+178~
+
+
+
