@@ -440,7 +440,63 @@ protected void render(ModelAndView mv, HttpServletRequest request, HttpServletRe
 - `canWrite()` 조건을 만족하면 `write()`를 호출해서 HTTP 응답 메시지 바디에 데이털르 생성한다.
 
 ### 요청 매핑 핸들러 어댑터 구조
-178~
+- `@RequestMapping`을 처리하는 핸들러 어댑터인 `RequestMappingHandlerAdapter`(요청 매핑 핸들러 어댑터)
+#### RequestMappingHandlerAdaper 동작 방식
+- DispatcherServlet
+- RequestMapping 핸들러 어댑터
+- Argument Resolver
+  - 컨트롤러의 파라미터, 어노테이션 정보를 기반으로 전달 데이터 생성
+  - HttpServletRequest, Model, @RequestParam, @ModelAttribure, @RequestBody, HttpEntity 
+- 핸들러(컨트롤러)
+  - 파라미터 호출
+- ReturnValueHandler
+  - 컨트롤러의 반환 값을 변환
+  - ModelandView, @ResponseBody, HttpEntity
+
+#### ArgumentResolver
+- 어노테이션 기반 컨트롤러는 ArgumentResolver를 통해 매우 다양한 파라미터를 사용할 수 있다.
+- 어노테이션 기반 컨트롤러를 처리하는 `RequestMappingHandlerAdaptor`는 `ArgumentResolver`를 호출해서 컨트롤러(핸들러)가 필요하는 다양한 파라미터의 값(객체)를 생성
+- 파라미터 값이 모두 준비되면 컨트롤러를 호출하면서 값을 넘긴다.
+```
+public interface HanderMethodArgumentAdaptor {
+  boolean supportsParameter(MethodParameter parameter);
+  
+  @Nullable
+  Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer, NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception;
+}
+```
+- `ArgumentResolver`의 `supportsParameter()`를 호출해서 해당 파라미터를 지원하는지 체크하고, 지원하면 `resolveArgument()`를 호출해서 실제 객체를 생성한다.
+- 그리고 이렇게 생성된 객체가 컨트롤러 호출시 넘어간다.
+#### ReturnValueHandler
+- `ArgumentResolver`와 비슷
+- 응답 값을 변환하고 처리
+- 컨트롤러에서 String으로 뷰 이름을 반환해도, 동작하게 만들어준다.
+
+#### HTTP 메시지 컨버터
+- HTTP 메시지 컨버터를 사용하는 `@RequestBody`는 컨트롤러가 필요로 하는 파라미터의 값에 사용되며, `@ResponseBody`는 컨트롤러의 반환 값을 이용한다.
+- 요청의 경우 `@RequestBody`와 `HttpEntity`를 각각 처리하는 `ArgumentResolver`가 있고, 이것이 HTTP 메시지 컨버터를 사용해서 필요한 객체를 생성한다.
+- 응답의 경우 `@ResponseBody`와 `HttpEntity`를 처리하는 `ReturnValueHandler`가 있고, 이것이 HTTP 메시지 컨버터를 호출해서 응답 결과를 만든다.
+
+#### WebMvcConfigurer 확장
+- 스프링이 필요한 대부분의 기능을 제공하기 때문에 실제 기능을 확장할 일이 많지는 않다.
+- 기능 확장은 `WebMvcConfigurer`를 상속받아서 스프링 빈으로 등록하면 된다.
 
 
+# 7. 스프링 MVC - 웹 페이지 만들기
+#### 타임리프 핵심
+- `th:xxx`가 붙은 부분은 서버사이드에서 렌덜이 되고, 기존 것을 대체한다. `th:xxx`이 없으면 기존 html의 `xxx` 속성이 그대로 사용된다.
+- HTML을 파일로 직접 열었을 때 `th:xxx`가 있어도 웹 브라우저는 `th:` 속성을 알지 못하므로 무시한다.
+- 따라서 HTML을 파일 보기를 유지하면서 템플릿 기능도 할 수 있다.
 
+### @ModelAttribute - Model 추가
+- `@ModelAttribute`는 Model에 `@ModelAttribute`로 지정한 객체를 자동으로 넣어준다.
+- 모델에 데이터를 담을 때 이름을 따로 지정할 수 있다.
+  - 기본은 `@ModelAttribute`에 지정한 name(value) 속성을 사용
+  - `model.addAttribute("hello", item)` 모델에 hello 이름으로 저장
+- 이름을 생략하면 모델에 저장될 때 클래스명을 사용하며, 이때 클래스의 첫글자만 소문자로 변경해서 등록한다.
+
+### PTG Post/Redirect/Get
+- 웹 브라우저의 새로고침은 마지막에 서버에 전송한 데이터를 다시 전송한다.
+- 이를 방지하기 위한 패턴이 POST, Redirect, GET 이다.
+- 상품 저장 후에 뷰 템플릿으로 이동하는 것이 아니라, 상품 상세 화면으로 리다이렉트를 호출하면 새로 고침 문제를 해결할 수 있다.
+- redirect 시에 + 처럼 URL에 변수를 더해서 사용하는 것은 URL 인코딩이 안되기 때문에 위험하다. 따라서 `RedirectAttributes`를 사용하자.
