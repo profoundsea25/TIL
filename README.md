@@ -36,6 +36,7 @@
 - [6. 로그인 처리1 - 쿠키, 세션](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/6.%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%B2%98%EB%A6%AC1%20-%20%EC%BF%A0%ED%82%A4%2C%20%EC%84%B8%EC%85%98.md)
 - [7. 로그인 처리2 - 필터, 인터셉터](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/7.%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%B2%98%EB%A6%AC2%20-%20%ED%95%84%ED%84%B0%2C%20%EC%9D%B8%ED%84%B0%EC%85%89%ED%84%B0.md)
 - [8. 예외 처리와 오류 페이지](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/8.%20%EC%98%88%EC%99%B8%20%EC%B2%98%EB%A6%AC%EC%99%80%20%EC%98%A4%EB%A5%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.md)
+- [9. API 예외 처리](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/9.%20API%20%EC%98%88%EC%99%B8%20%EC%B2%98%EB%A6%AC.md)
 #### Basics
 - [MVC 패턴](https://github.com/profoundsea25/TIL/blob/main/MVC/MVC%20%ED%8C%A8%ED%84%B4.md)
 - [@Autowired, @Resource, @Inject의 차이](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%40Autowired%2C%20%40Resource%2C%20%40Inject%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
