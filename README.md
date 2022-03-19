@@ -30,6 +30,7 @@
 - [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술 (정리)](https://github.com/profoundsea25/TIL/blob/main/MVC/%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%86%BC%20MVC%201%E1%84%91%E1%85%A7%E1%86%AB%20-%20%E1%84%87%E1%85%A2%E1%86%A8%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3%20%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%92%E1%85%A2%E1%86%A8%E1%84%89%E1%85%B5%E1%86%B7%20%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF%20(%EC%A0%95%EB%A6%AC).md)
 #### 스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
 - [1. 타임리프 - 기본 기능](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/1.%20%ED%83%80%EC%9E%84%EB%A6%AC%ED%94%84%20-%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5.md)
+- [3. 메시지, 국제화](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/3.%20%EB%A9%94%EC%8B%9C%EC%A7%80%2C%20%EA%B5%AD%EC%A0%9C%ED%99%94.md)
 - [4. 검증1 - Validation](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/4.%20%EA%B2%80%EC%A6%9D1%20-%20Validation.md)
 - [5. 검증2 - Bean Validation](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/5.%20%EA%B2%80%EC%A6%9D2%20-%20Bean%20Validation.md)
 - [6. 로그인 처리1 - 쿠키, 세션](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/6.%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%B2%98%EB%A6%AC1%20-%20%EC%BF%A0%ED%82%A4%2C%20%EC%84%B8%EC%85%98.md)
