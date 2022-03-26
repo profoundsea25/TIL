@@ -78,3 +78,44 @@
 - 따로 공부하기
 
 #
+### 사용자 정의 리포지토리 구현
+- 스프링 데이터 JPA 리포지토리는 인터페이스만 정의하고 구현체는 스프링이 자동 생성
+- 인터페이스의 메서드를 직접 구현하고 싶다면, 구현 클래스 이름을 리포지토리 인터페이스 이름 + Impl
+  - 스프링 데이터 JPA가 인식해서 스프링 빈으로 등록한다.
+- Impl 대신 다른 이름으로 변경하고 싶으면 XML이나 JavaConfig 설정을 건드리면 된다.
+- 실무에서는 주로 QueryDSL이나 SpringJdbcTemplate을 함께 사용할 때 사용자 정의 리포지토리 기능을 자주 사용한다.
+- 항상 사용자 정의 리포지토리가 필요한 것은 아님. 그냥 임의의 리포지토리를 만들어도 되며, 이때는 스프링 데이터 JPA와 관계없이 별로도 작동.
+- 최근에는 사용자 정의 인터페이스 명 + Impl 방식도 지원한다. (소스코드에서 `MemberRepositoryImpl` 대신에 `MemberRepositoryCustomImpl`같이 구현해도 됨, 더 직관적이기 때문에 권장)
+
+### Auditing
+- 엔티티를 생성, 변경할 때 변경한 사람과 시간을 추적하고 싶을 때 사용
+- JPA 주요 이벤트 어노테이션
+  - `@PrePersist`, `@PostPersist`
+  - `@PreUpdate`, `@PostUpdate`
+
+#### 스프링 데이터 JPA 사용
+- `@EnableJpaAuditing` : 스프링 부트 설정 클래스에 적용
+- `@EntityListeners(AuditingEntityListener.class)` : 엔티티에 적용
+- `@CreatedDate` `@LastModifiedDate` `@CreatedBy` `@LastModifiedBy`
+
+### Web 확장 - 도메인 클래스 컨버터
+- HTTP 파라미터로 넘어온 엔티티의 아이디로 엔티티 객체를 찾아서 바인딩
+- 예를 들어 HTTP 요청은 회원 id를 받지만 도메인 클래스 컨버터가 중간에 동작해서 회원 엔티티를 반환
+- 도메인 클래스 컨버터도 리파지토리를 사용해서 엔티티를 찾음
+- 트랜잭션이 없는 범위에서 엔티티를 조회했으므로, 엔티티를 변경해서 DB에 반영되지 않는다. 따라서 이 엔티티는 단순 조회용으로만 사용해야 한다.
+
+### Web 확장 - 페이징과 정렬
+- 컨트롤러 파라미터로 `Pageable`을 받을 수 있다.
+- 요청 파라미터로 여러 기능을 사용할 수 있다.
+  - `/members?page=0&size3&sort=id,desc&sort=username,desc`
+  - page : 현재 페이지, 0부터 시작한다.
+  - size : 한 페이지에 노출할 데이터 건수. 기본값은 20
+  - sort : 정렬 조건을 정의한다. asc는 생략 가능
+- 페이징 정보가 둘 이상이면 접두사로 구분
+  - `@Qualifier`에 접두사명 추가 "접두사명_XXX"
+  - 예) `/members?meber_page=0&order_page=1`
+```java
+public String list(
+  @Qualifier("member") Pageable memberPageable,
+  @Qualifier("order") Pageable orderPageable, ...
+```
