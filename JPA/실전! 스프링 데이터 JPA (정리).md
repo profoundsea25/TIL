@@ -119,3 +119,48 @@ public String list(
   @Qualifier("member") Pageable memberPageable,
   @Qualifier("order") Pageable orderPageable, ...
 ```
+
+#
+### 스프링 데이터 JPA 분석
+#### @Transactional
+- JPA의 모든 변경은 트랜잭션 안에서 동작
+- 스프링 데이터 JPA는 변경(등록, 수정, 삭제) 메서드를 트랜잭션 처리
+- 서비스 계층에서 트랜잭션을 시작하지 않으면 리파지토리에서 트랜잭션 시작
+- 서비스 계층에서 트랜잭션을 시작하면 리파지토리는 해당 트랜잭션을 전파 받아서 사용
+- 그래서 스프링 데이터 JPA를 사용할 때 트랜잭션이 없어도 데이터 등록, 변경이 가능함. (사실은 트랜잭션이 리포지토리 계층에 걸려있음)
+
+#### @Transactional(readOnly = true)
+- 데이터를 단순히 조회만 하고 변경하지 않는 트랜잭션에서 `readOnly = true`옵션을 사용하면 플러시를 생략해서 약간의 성능 향상을 얻을 수 있음.
+
+#### save()
+- 새로운 엔티티면 저장 persist
+- 새로운 엔티티가 아니면 병합 merge
+- 새로운 엔티티를 판단하는 기본 전략
+  - 식별자가 객체일 때 null
+  - 식별자가 자바 기본 타입일 때 0
+  - `Persistable` 인터페이스를 구현해서 판단 로직 변경 가능 (`@CreatedDate`로 새 엔티티 판별을 할 수도 있다.)
+
+#
+### 나머지 기능들
+- 요약 : QueryDSL 쓰세요.
+
+### Projections
+- 엔티티 대신에 DTO를 편리하게 조회할 때 사용 ex) 전체 엔티티가 아니라 만약 회원 이름만 딱 조회하고 싶을 때
+- 조회할 엔티티의 필드를 getter 형식으로 지정하면 해당 필드만 선택해서 조회(Projection)
+- 프로젝션 대상이 root 엔티티면 JPQL SELECT 절 최적화가 되지만, 그 외의 경우(JOIN이 들어가는 경우)에는 최적화가 되지 않는다.
+- 그러니 단순 조회용으로 쓰자.
+#### 인터페이스 기반 Closed Projections
+```java
+public interface UsernameOnly {
+  String getUsername();
+}
+
+public interface MemberRepository ... {
+  List<UsernameOnly> findProjectionsByUsername(String username);
+}
+```
+#### 동적 Projections
+- Generic Type을 주면, 동적으로 프로젝션 데이터 변경 가능
+```java
+<T> List<T> findProjectionsByUsername(String username, Class<T> type);
+```
