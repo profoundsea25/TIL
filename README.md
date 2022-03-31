@@ -8,6 +8,19 @@
 #### 스프링 핵심 원리 - 기본편
 - [객체 지향 설계와 스프링](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EA%B0%9D%EC%B2%B4%20%EC%A7%80%ED%96%A5%20%EC%84%A4%EA%B3%84%EC%99%80%20%EC%8A%A4%ED%94%84%EB%A7%81.md)
 - [스프링 핵심 원리 - 기본편 (정리)](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%95%B5%EC%8B%AC%20%EC%9B%90%EB%A6%AC%20-%20%EA%B8%B0%EB%B3%B8%ED%8E%B8%20%EC%A0%95%EB%A6%AC.md)
+#### 스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술
+- [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술 (정리)](https://github.com/profoundsea25/TIL/blob/main/MVC/%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%86%BC%20MVC%201%E1%84%91%E1%85%A7%E1%86%AB%20-%20%E1%84%87%E1%85%A2%E1%86%A8%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3%20%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%92%E1%85%A2%E1%86%A8%E1%84%89%E1%85%B5%E1%86%B7%20%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF%20(%EC%A0%95%EB%A6%AC).md)
+#### 스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
+- [1. 타임리프 - 기본 기능](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/1.%20%ED%83%80%EC%9E%84%EB%A6%AC%ED%94%84%20-%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5.md)
+- [3. 메시지, 국제화](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/3.%20%EB%A9%94%EC%8B%9C%EC%A7%80%2C%20%EA%B5%AD%EC%A0%9C%ED%99%94.md)
+- [4. 검증1 - Validation](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/4.%20%EA%B2%80%EC%A6%9D1%20-%20Validation.md)
+- [5. 검증2 - Bean Validation](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/5.%20%EA%B2%80%EC%A6%9D2%20-%20Bean%20Validation.md)
+- [6. 로그인 처리1 - 쿠키, 세션](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/6.%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%B2%98%EB%A6%AC1%20-%20%EC%BF%A0%ED%82%A4%2C%20%EC%84%B8%EC%85%98.md)
+- [7. 로그인 처리2 - 필터, 인터셉터](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/7.%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%B2%98%EB%A6%AC2%20-%20%ED%95%84%ED%84%B0%2C%20%EC%9D%B8%ED%84%B0%EC%85%89%ED%84%B0.md)
+- [8. 예외 처리와 오류 페이지](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/8.%20%EC%98%88%EC%99%B8%20%EC%B2%98%EB%A6%AC%EC%99%80%20%EC%98%A4%EB%A5%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.md)
+- [9. API 예외 처리](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/9.%20API%20%EC%98%88%EC%99%B8%20%EC%B2%98%EB%A6%AC.md)
+- [10. 스프링 타입 컨버터](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/10.%20%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%83%80%EC%9E%85%20%EC%BB%A8%EB%B2%84%ED%84%B0.md)
+- [11. 파일 업로드](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/11.%20%ED%8C%8C%EC%9D%BC%20%EC%97%85%EB%A1%9C%EB%93%9C.md)
 #### 자바 ORM 표준 JPA 프로그래밍 - 기본편
 - [01. JPA 소개](https://github.com/profoundsea25/TIL/blob/main/JPA/01.%20JPA%20%EC%86%8C%EA%B0%9C.md)
 - [02. JPA 시작](https://github.com/profoundsea25/TIL/blob/main/JPA/02.%20JPA%20%EC%8B%9C%EC%9E%91.md)
@@ -26,25 +39,13 @@
 - [JPQL - 벌크 연산](https://github.com/profoundsea25/TIL/blob/main/JPA/JPQL%20-%20%EB%B2%8C%ED%81%AC%20%EC%97%B0%EC%82%B0.md)
 #### 실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발
 - [실전! 스프링 부트와 JPA 활용 1 (정리)](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%EC%99%80%20JPA%20%ED%99%9C%EC%9A%A9%201%20%EC%A0%95%EB%A6%AC.md)
+#### 실전! 스프링 부트와 JPA 활용2 - API 개발과 성능 최적화
+- [실전! 스프링 부트와 JPA 활용 2 (정리)](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%EC%99%80%20JPA%20%ED%99%9C%EC%9A%A9%202%20(%EC%A0%95%EB%A6%AC).md)
 #### 실전! 스프링 데이터 JPA
 - [실전! 스프링 데이터 JPA (정리)](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20JPA%20(%EC%A0%95%EB%A6%AC).md)
-#### 스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술
-- [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술 (정리)](https://github.com/profoundsea25/TIL/blob/main/MVC/%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%86%BC%20MVC%201%E1%84%91%E1%85%A7%E1%86%AB%20-%20%E1%84%87%E1%85%A2%E1%86%A8%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3%20%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%92%E1%85%A2%E1%86%A8%E1%84%89%E1%85%B5%E1%86%B7%20%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF%20(%EC%A0%95%EB%A6%AC).md)
-#### 스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
-- [1. 타임리프 - 기본 기능](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/1.%20%ED%83%80%EC%9E%84%EB%A6%AC%ED%94%84%20-%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5.md)
-- [3. 메시지, 국제화](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/3.%20%EB%A9%94%EC%8B%9C%EC%A7%80%2C%20%EA%B5%AD%EC%A0%9C%ED%99%94.md)
-- [4. 검증1 - Validation](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/4.%20%EA%B2%80%EC%A6%9D1%20-%20Validation.md)
-- [5. 검증2 - Bean Validation](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/5.%20%EA%B2%80%EC%A6%9D2%20-%20Bean%20Validation.md)
-- [6. 로그인 처리1 - 쿠키, 세션](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/6.%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%B2%98%EB%A6%AC1%20-%20%EC%BF%A0%ED%82%A4%2C%20%EC%84%B8%EC%85%98.md)
-- [7. 로그인 처리2 - 필터, 인터셉터](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/7.%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%B2%98%EB%A6%AC2%20-%20%ED%95%84%ED%84%B0%2C%20%EC%9D%B8%ED%84%B0%EC%85%89%ED%84%B0.md)
-- [8. 예외 처리와 오류 페이지](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/8.%20%EC%98%88%EC%99%B8%20%EC%B2%98%EB%A6%AC%EC%99%80%20%EC%98%A4%EB%A5%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.md)
-- [9. API 예외 처리](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/9.%20API%20%EC%98%88%EC%99%B8%20%EC%B2%98%EB%A6%AC.md)
-- [10. 스프링 타입 컨버터](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/10.%20%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%83%80%EC%9E%85%20%EC%BB%A8%EB%B2%84%ED%84%B0.md)
-- [11. 파일 업로드](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/11.%20%ED%8C%8C%EC%9D%BC%20%EC%97%85%EB%A1%9C%EB%93%9C.md)
 #### Basics
 - [MVC 패턴](https://github.com/profoundsea25/TIL/blob/main/MVC/MVC%20%ED%8C%A8%ED%84%B4.md)
 - [@Autowired, @Resource, @Inject의 차이](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%40Autowired%2C%20%40Resource%2C%20%40Inject%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
-
 
 ## DB
 - [RDBMS와 NoSQL](https://github.com/profoundsea25/TIL/blob/main/DB/RDBMS%EC%99%80%20NoSQL.md)
