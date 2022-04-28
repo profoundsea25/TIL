@@ -23,6 +23,8 @@
 - [9. API 예외 처리](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/9.%20API%20%EC%98%88%EC%99%B8%20%EC%B2%98%EB%A6%AC.md)
 - [10. 스프링 타입 컨버터](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/10.%20%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%83%80%EC%9E%85%20%EC%BB%A8%EB%B2%84%ED%84%B0.md)
 - [11. 파일 업로드](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/11.%20%ED%8C%8C%EC%9D%BC%20%EC%97%85%EB%A1%9C%EB%93%9C.md)
+#### 스프링 DB 1편 - 데이터 접근 핵심 원리
+- [스프링 DB 1편 - 데이터 접근 핵심 원리 (정리)](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EC%8A%A4%ED%94%84%EB%A7%81%20DB%201%ED%8E%B8%20-%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%91%EA%B7%BC%20%ED%95%B5%EC%8B%AC%20%EC%9B%90%EB%A6%AC%20(%EC%A0%95%EB%A6%AC).md)
 #### 자바 ORM 표준 JPA 프로그래밍 - 기본편
 - [01. JPA 소개](https://github.com/profoundsea25/TIL/blob/main/JPA/01.%20JPA%20%EC%86%8C%EA%B0%9C.md)
 - [02. JPA 시작](https://github.com/profoundsea25/TIL/blob/main/JPA/02.%20JPA%20%EC%8B%9C%EC%9E%91.md)
