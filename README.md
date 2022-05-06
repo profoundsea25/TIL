@@ -3,6 +3,9 @@
 
 [김남윤님 TIL 저장소](https://github.com/cheese10yun/TIL), [HomoEfficio님 TIL 저장소](https://github.com/HomoEfficio/dev-tips), [김남준님 TIL 저장소](https://github.com/namjunemy/TIL) 에서 구조와 내용을 많이 참고하면서 작성하였습니다.
 
+## Book
+- [프로그래머의 길, 멘토에게 묻다](https://github.com/profoundsea25/TIL/blob/main/Book/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%9D%98%20%EA%B8%B8%2C%20%EB%A9%98%ED%86%A0%EC%97%90%EA%B2%8C%20%EB%AC%BB%EB%8B%A4.md)
+- [클린코드](https://github.com/profoundsea25/TIL/blob/main/Book/%ED%81%B4%EB%A6%B0%EC%BD%94%EB%93%9C.md)
 
 ## SPRING
 #### 스프링 핵심 원리 - 기본편
@@ -25,6 +28,11 @@
 - [11. 파일 업로드](https://github.com/profoundsea25/TIL/blob/main/MVC/Spring%20MVC%202/11.%20%ED%8C%8C%EC%9D%BC%20%EC%97%85%EB%A1%9C%EB%93%9C.md)
 #### 스프링 DB 1편 - 데이터 접근 핵심 원리
 - [스프링 DB 1편 - 데이터 접근 핵심 원리 (정리)](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%EC%8A%A4%ED%94%84%EB%A7%81%20DB%201%ED%8E%B8%20-%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%91%EA%B7%BC%20%ED%95%B5%EC%8B%AC%20%EC%9B%90%EB%A6%AC%20(%EC%A0%95%EB%A6%AC).md)
+#### 기타
+- [MVC 패턴](https://github.com/profoundsea25/TIL/blob/main/MVC/MVC%20%ED%8C%A8%ED%84%B4.md)
+- [@Autowired, @Resource, @Inject의 차이](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%40Autowired%2C%20%40Resource%2C%20%40Inject%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
+
+## JPA
 #### 자바 ORM 표준 JPA 프로그래밍 - 기본편
 - [01. JPA 소개](https://github.com/profoundsea25/TIL/blob/main/JPA/01.%20JPA%20%EC%86%8C%EA%B0%9C.md)
 - [02. JPA 시작](https://github.com/profoundsea25/TIL/blob/main/JPA/02.%20JPA%20%EC%8B%9C%EC%9E%91.md)
@@ -47,9 +55,8 @@
 - [실전! 스프링 부트와 JPA 활용 2 (정리)](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B6%80%ED%8A%B8%EC%99%80%20JPA%20%ED%99%9C%EC%9A%A9%202%20(%EC%A0%95%EB%A6%AC).md)
 #### 실전! 스프링 데이터 JPA
 - [실전! 스프링 데이터 JPA (정리)](https://github.com/profoundsea25/TIL/blob/main/JPA/%EC%8B%A4%EC%A0%84!%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20JPA%20(%EC%A0%95%EB%A6%AC).md)
-#### Basics
-- [MVC 패턴](https://github.com/profoundsea25/TIL/blob/main/MVC/MVC%20%ED%8C%A8%ED%84%B4.md)
-- [@Autowired, @Resource, @Inject의 차이](https://github.com/profoundsea25/TIL/blob/main/Spring%20Basics/%40Autowired%2C%20%40Resource%2C%20%40Inject%EC%9D%98%20%EC%B0%A8%EC%9D%B4.md)
+
+## Java
 
 ## DB
 - [RDBMS와 NoSQL](https://github.com/profoundsea25/TIL/blob/main/DB/RDBMS%EC%99%80%20NoSQL.md)
@@ -86,7 +93,3 @@
 - [섹션 7. 가상메모리](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%207.%20%EA%B0%80%EC%83%81%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
 - [섹션 8. 입출력 장치](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%208.%20%EC%9E%85%EC%B6%9C%EB%A0%A5%20%EC%9E%A5%EC%B9%98.md)
 - [섹션 9. 파일시스템](https://github.com/profoundsea25/TIL/blob/main/OS/%EC%84%B9%EC%85%98%209.%20%ED%8C%8C%EC%9D%BC%EC%8B%9C%EC%8A%A4%ED%85%9C.md)
-
-## Book
-- [프로그래머의 길, 멘토에게 묻다](https://github.com/profoundsea25/TIL/blob/main/Book/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%9D%98%20%EA%B8%B8%2C%20%EB%A9%98%ED%86%A0%EC%97%90%EA%B2%8C%20%EB%AC%BB%EB%8B%A4.md)
-- [클린코드](https://github.com/profoundsea25/TIL/blob/main/Book/%ED%81%B4%EB%A6%B0%EC%BD%94%EB%93%9C.md)
