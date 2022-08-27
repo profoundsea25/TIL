@@ -10,7 +10,7 @@
 - [Effective Java 3/E](https://github.com/profoundsea25/TIL/tree/main/Book/Effective%20Java%203%5CE)
 - [면접을 위한 CS 전공지식 노트](https://github.com/profoundsea25/TIL/tree/main/Book/%EB%A9%B4%EC%A0%91%EC%9D%84%20%EC%9C%84%ED%95%9C%20CS%20%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D%20%EB%85%B8%ED%8A%B8)
 - [자바의 신](https://github.com/profoundsea25/TIL/tree/main/Book/%EC%9E%90%EB%B0%94%EC%9D%98%20%EC%8B%A0)
-- [실전 자바 소프트웨어 개발](https://github.com/profoundsea25/TIL/blob/main/Book/%EC%8B%A4%EC%A0%84%20%EC%9E%90%EB%B0%94%20%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%20%EA%B0%9C%EB%B0%9C.md)
+- [실전 자바 소프트웨어 개발](https://github.com/profoundsea25/TIL/tree/main/Book/%EC%8B%A4%EC%A0%84%20%EC%9E%90%EB%B0%94%20%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%20%EA%B0%9C%EB%B0%9C)
 
 ## SPRING
 #### 스프링 핵심 원리 - 기본편
