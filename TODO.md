@@ -39,7 +39,7 @@
 - slack https://slack.engineering/
 - airbnb https://medium.com/airbnb-engineering
 - x https://blog.x.com/engineering/en_us
-- [진태양님 블로그](https://dataportal.kr/posts)
+- 진태양님 블로그 https://dataportal.kr/posts
 
 ### articles
 [업계에서 10년 있은 뒤, 마음이 바뀐 소프트웨어 개발 토픽들](https://news.hada.io/topic?id=19081&utm_source=slack&utm_medium=bot&utm_campaign=T01CRCQLR4K)
