@@ -107,13 +107,42 @@
 - 항상 작성하는 코드로 인해 어떤 일이 벌어질지 명확히 이해해야 한다. 
 
 ### 컬렉션 함수
-- `filter`: 컬렉션을 순회하며 주어진 람다가 true를 반환하는 원소들만 모은다.
-  - `filterIndexed`: 원소의 인덱스를 포함하여 추출
-  - `filterKeys`: map에서 키 기준 추출
-  - `filterValues`: map에서 값 기준 추출
-- `map`: 입력 컬렉션의 원소를 변환한다.
-  - `mapIndexed`: 원소의 인덱스를 포함한 `map` 연산
-  - `mapKeys`: map에서 키를 변환 (Map<K1, V) -> Map<K2, V>)
-  - `mapValues`: map에서 값을 변환 (Map<K, V1> -> Map<K, V2>)
-- `reduce`: 282~
-- `fold`:
+- 원소 제거와 변환: `filter`, `map`
+  - `filter`: 컬렉션을 순회하며 주어진 람다가 true를 반환하는 원소들만 모은다.
+    - `filterIndexed`: 원소의 인덱스를 포함하여 추출
+    - `filterKeys`: map에서 키 기준 추출
+    - `filterValues`: map에서 값 기준 추출
+  - `map`: 입력 컬렉션의 원소를 변환한다.
+    - `mapIndexed`: 원소의 인덱스를 포함한 `map` 연산
+    - `mapKeys`: map에서 키를 변환 (Map<K1, V) -> Map<K2, V>)
+    - `mapValues`: map에서 값을 변환 (Map<K, V1> -> Map<K, V2>)
+- 컬렉션 값 누적: `reduce`, `fold`
+  - 컬렉션의 정보를 종합한다.
+  - 원소로 이뤄진 컬렉션을 받아서 한 값을 반환한다. 이 값은 accumulator(누적)을 통해 점진적으로 만들어진다.
+  - 람다는 각 원소에 대해 호출되며 새로운 누적 값을 반환해야 한다.
+  - `reduce`
+    - 1번째 원소를 accumulator에 넣어서 시작한다.
+    - 빈 리스트에서 호출하면 Exception 발생
+  - `fold`
+    - `reduce`와 비슷하지만, 초기값을 설정할 수 있다.
+  - `runningReduce`, `runningFold`
+    - `reduce`와 `fold`이 최종 결과값만 반환한다면, running이 붙은 함수들은 모든 중간 결과를 포함한 리스트를 반환한다.
+- 컬렉션에 술어 적용: `all`, `any`, `none`, `count`, `find`
+  - `all`: 모든 원소들이 조건을 만족하는지 판별
+  - `any`: 원소들 중 하나라도 조건을 만족하는지 판별
+    - `!all { predicate } == any { !predicate }`
+  - `none`: 모든 원소들이 조건을 만족하지 않음을 판별 (=`!any`)
+  - empty list 에선 어떻게 동작할까?
+    - `all` -> 항상 true (조건을 만족하지 않는 원소를 댈 수 없기 때문)
+    - `any` -> 항상 false (조건을 만족하는 원소가 없기 때문)
+    - `none` -> 항상 true (any와 반대)
+  - `count`: 조건을 만족하는 원소의 개수 반환
+    - `filter { }.size`와 중간 과정이 다르다. `filter`는 중간 컬렉션을 만들지만, `count`는 원소 개수만 추적한다.
+  - `find`: 조건을 만족하는 첫 번째 원소 반환
+    - 원소가 전혀 없으면 `null` 반환 (`firstOrNull`과 같다.)
+- 파티션을 분할해 리스트의 쌍으로 만들기: `partition`
+  - `partition`: 조건을 만족하는 그룹과 그렇지 않은 그룹으로 나눈다. 전체 컬렉션을 2번 순회하지 않는다.
+- 리스트를 여러 그룹으로 이뤄진 맵으로 바꾸기: `groupBy`
+  - `groupBy`: 컬렉션의 원소를 어떤 특성에 따라 여러 그룹으로 나눌 때 사용
+    - 컬렉션의 원소를 구분하는 특성이 key, 각 그룹이 value가 된다.
+- 컬렉션을 맵으로 변환: `associate`, `associateWith`, `associateBy`
