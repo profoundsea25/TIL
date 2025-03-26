@@ -42,6 +42,23 @@
 - 진태양님 블로그 https://dataportal.kr/posts
 
 ### articles
+https://docs.spring.io/spring-ai/reference/concepts.html
+https://d2.naver.com/helloworld/6615449
+https://blog.bespinglobal.com/post/bigdata-spark-%ea%b0%9c%ec%9a%94-%ec%a0%95%eb%a6%ac/?utm_source=rss&utm_medium=rss&utm_campaign=bigdata-spark-%25ea%25b0%259c%25ec%259a%2594-%25ec%25a0%2595%25eb%25a6%25ac
+https://devocean.sk.com/blog/techBoardDetail.do?ID=167310&boardType=techBlog
+https://youtu.be/704qQs6KoUk?si=-tg494SyPeor90qs
+https://devocean.sk.com/blog/techBoardDetail.do?ID=167295&boardType=techBlog
+https://devocean.sk.com/blog/techBoardDetail.do?ID=167301&boardType=techBlog
+https://d2.naver.com/helloworld/9582944
+https://techblog.lycorp.co.jp/ko/techniques-for-improving-code-quality-6
+https://d2.naver.com/helloworld/9921217
+https://wikidocs.net/book/17027
+https://techblog.lycorp.co.jp/ko/building-llmops-for-creating-testing-deploying-of-llm-apps
+https://hyperconnect.github.io/2025/02/10/spring-transactional-rollback.html?utm_source=oneoneone
+https://engineering-skcc.github.io/cloud/tomcat/apache/DB-Pool-For-Event/
+https://medium.com/crowdworks-tech/%EC%9C%A0%EC%95%88%ED%83%80%EC%A6%9D%EA%B6%8C-ai-agent-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%8B%A4%EC%A0%84-llm-%EC%84%9C%EB%B9%84%EC%8A%A4-%EA%B0%9C%EB%B0%9C-%EA%B3%A0%EC%83%9D-%EA%B8%B0-3b874a457aaa
+https://yozm.wishket.com/magazine/detail/3006/
+https://techblog.lotteon.com/%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4-%EC%9D%B4%EB%A0%A5-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B0%9C%EB%B0%9C%EA%B8%B0-a5a14a45ec76
 [업계에서 10년 있은 뒤, 마음이 바뀐 소프트웨어 개발 토픽들](https://news.hada.io/topic?id=19081&utm_source=slack&utm_medium=bot&utm_campaign=T01CRCQLR4K)
 [누구나 원하는 개발자되기](https://blog.shiren.dev/ko/post/2020-11-23)
 https://github.com/Youngerjesus/refactoring-2nd-edition
