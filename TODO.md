@@ -42,6 +42,8 @@
 - 진태양님 블로그 https://dataportal.kr/posts
 
 ### articles
+https://blog.sionic.ai/spring-ai-series-1
+https://www.youtube.com/watch?v=2bzrUsxCyUU
 https://docs.spring.io/spring-ai/reference/concepts.html
 https://d2.naver.com/helloworld/6615449
 https://blog.bespinglobal.com/post/bigdata-spark-%ea%b0%9c%ec%9a%94-%ec%a0%95%eb%a6%ac/?utm_source=rss&utm_medium=rss&utm_campaign=bigdata-spark-%25ea%25b0%259c%25ec%259a%2594-%25ec%25a0%2595%25eb%25a6%25ac
