@@ -564,3 +564,72 @@
 - 위임 프로퍼티는 커스텀 접근자가 있는 감춰진 프로퍼티로 변환된다.
   - Map/MutableMap 인터페이스는 getValue/setValue 확장 함수가 있어 위임을 지원한다.
   - Exposed 프레임워크에서 DB에 대한 Entity 컬럼을 위임으로 표현한다.
+
+## 10장. 고차 함수: 람다를 파라미터와 반환값으로 사용
+
+### 10.1 다른 함수를 인자로 받거나 반환하는 함수 정의: 고차 함수
+- 람다를 인자로 받는 함수를 정의하려면, 함수 타입은 람다의 파라미터 타입과 반환 타입을 지정한다.
+  - 방법
+    - 함수 파라미터의 타입을 괄호 안에 넣고,
+    - 화살표를 추가한 다음,
+    - 함수의 반환 타입을 지정한다.
+  - ex. `val someMethod: (Int?, String) -> Unit = ...`
+  - 반환타입의 `Unit`은 생략할 수 없다.
+- 인자로 전달 받은 함수 호출
+  - 일반 함수와 같이, 함수 이름 뒤에 괄호를 붙이고 괄호 안에 원하는 인자를 콤마(,)로 구분한다.
+  ```kotlin
+      fun calculate(operation: (Int, Int) -> Int) {
+          return operation(1, 2)
+      }
+  ```
+  - 파라미터 타입에도 이름을 설정할 수 있지만, 활용할 때 그 이름이 강제되지는 않는다.
+  ```kotlin
+      fun calculate(operation: (first: Int, second: Int) -> Int) {
+          return operation(1, 2)
+      }
+
+      fun main() {
+          calculate { x, y -> x + y }
+          calculate { a, b -> a * b }
+      }
+  ```
+  - 예시
+  ```kotlin
+      fun String.filter(predicate: (Char) -> Boolean): String {
+          return buildString {
+              for (char in this) {
+                  if (predicate(char)) append(char)
+              }
+          }
+      }
+
+      fun main() {
+          "asdqwezxc".filter { it in 'a'..'n' }
+      }
+  ```
+- 자바에서 코틀린 람다를 사용할 수 있다.
+  - 다만, `Unit`을 반환하는 함수의 경우 자바에서 `Unit.INSTANCE`를 명시적으로 반환해야 한다. (`void`를 반환할 수 없다.)
+- 컴파일 시, 내부적으로 `FunctionN` 인터페이스를 만들어 활용한다. (N은 인자 개수)
+  - 해당 인터페이스에는 `operator fun invoke()`가 선언되어 있다.
+  - 파라미터 개수 제한 없이 원하는 만큼 파라미터를 사용하는 함수에 대한 인터페이스를 사용할 수 있다.
+- 함수 타입 선언 시, 기본값을 지정할 수 있다.
+  - 다른 디폴트 파라미터 값과 마찬가지로 함수 타입에 대한 기본값 선언도 = 뒤에 람다를 넣으면 된다.
+  - 예시
+  ```kotlin
+      fun <T> Collection<T>.joinToString(
+          separator: String = ",",
+          prefix: String = "",
+          postfix: String = "",
+          transform: (T) -> String = { it.toString() }	
+      ): String {
+          val result = StringBuilder(prefix)
+          
+          for ((index, element) in this.withIndex()) {
+              if (index > 0) result.append(separator)
+              result.append(transform(element))
+          }
+
+          result.append(postfix)
+          return result.toString()
+      }
+  ```
