@@ -633,3 +633,16 @@
           return result.toString()
       }
   ```
+- 함수에서 함수를 반환할 수도 있다. (생각보다 많이 쓰이지는 않는다.)
+- 람다를 활용해 중복을 줄여 코드 재사용성을 높일 수 있다.
+  - 람다는 반복적인 행동을 추출할 수 있다.
+  ```kotlin
+      fun List<SiteVisit>.avgDurationFor(predicate: (SiteVisit) -> Boolean) = 
+          filter(predicate).map(SiteVisit::duration).average()
+
+      // 활용
+      list.avgDurationFor { it.os in setOf(OS.IOS, OS.ANDROID) }
+      list.avgDurationFor { it.os == OS.IOS && it.path == "/signup" }
+  ```
+
+### 10.2 인라인 함수를 사용해 람다의 부가 비용 없애기
