@@ -788,3 +788,54 @@ inline val <reified T> T.canonical: String
 - val은 out에만 해당되며, var는 in/out 모두 해당된다.
 - private 메서드의 파라미터는 in/out 모두 아니다.
   - 변성 규칙은 클래스 외부의 사용자가 클래스를 잘못 사용하는 일을 막기 위한 것이기 때문에, 클래스 내부 구현에는 적용되지 않는다.
+#### 11.3.4 반공변성은 하위 타입 관계를 뒤집는다.
+- 반공변성(contravariance)을 가진 클래스의 하위 타입 관계는 그 클래스의 타입 파라미터의 상하위 타입 관계와 반대다.
+  - ex. `Comparator`
+  ```kotlin
+      interface Comparator<in T> {
+          fun compare(e1: T, e2: T): Int
+      }
+  ```
+  - T 타입의 값을 소비하기만 한다. 즉, T가 `in` 위치에서만 쓰인다. 따라서 T 앞에는 `in` 키워드가 붙는다.
+- 타입 B가 타입 A의 하위 타입일 때, `Consumer<A>`가 `Consumer<B>`의 하위 타입인 관계가 성립한다면 제네릭 클래스는 타입 인자 T에 대해 반공변이다.
+- `in` 키워드가 붙은 타입이 이 클래스의 메서드 안으로 전달돼 메서드에 의해 소비된다는 뜻이다.
+  - 그 타입 인자를 오직 `in` 위치에서만 사용할 수 있다.
+- 클래스나 인터페이스가 어떤 타입 파라미터에 대해서는 공변적이면서 다른 타입 파라미터에 대해서는 반공변적일 수 있다.
+  - 
+  ```kotlin
+      interface Function1<in P, out R> {
+          operator fun invoke(p: P): R
+      }
+  ```
+#### 11.3.5 사용 지점 변성을 사용해 타입이 언급되는 지점에서 변성 지정
+- 선언 지점 변성(declaration site variance)
+  - 클래스를 선언하면서 변성을 지정하면 그 클래스를 사용하는 모든 장소에서 변성 지정자가 영향을 끼치므로 편리하다. (코틀린)
+- 사용 지점 변성(use-site variance)
+  - 타입 파라미터가 있는 타입을 사용할 때마다 그 타입 파라미터를 하위 타입이나 상위 타입 중 어떤 타입으로 대치할 수 있는지 명시 (자바)
+  - 코틀린도 사용 지점 변성을 지원한다.
+- ex.
+```kotlin
+	// 무공변 파라미터 타입을 사용하는 데이터 복사 함수
+	fun <T> copyData(source: MutableList<T>, destination: MutableList<T>) {
+		for (item in source) {
+			destination.add(item)
+		}
+	}
+	
+	// 타입 파라미터가 둘인 데이터 복사 함수
+	fun <T: R, R> copyData(source: MutableList<T>, destination: MutableList<R>) {
+		for (item in source) {
+			destination.add(item)
+		}
+	}
+	
+	// 아웃-프로젝션 타입 파라미터를 사용하는 데이터 복사 함수
+	fun <T> copyData(source: MutableList<out T>, destination: MutableList<T>) {
+		for (item in source) {
+			destination.add(item)
+		}
+	}
+```
+- 타입 선언에서 타입 파라미터를 사용하는 위치라면 어디에나 변성 변경자를 붙일 수 있다.
+- 인터페이스/클래스에서 선언한 변성은 사용할 때 매번 선언할 필요는 없다.
+  - ex. List는 `List<out T>`라고 선언되어 있으므로, 사용할 때는 `List<T>`라고 써도 `out`이 적용된다.
