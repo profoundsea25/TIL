@@ -839,3 +839,47 @@ inline val <reified T> T.canonical: String
 - 타입 선언에서 타입 파라미터를 사용하는 위치라면 어디에나 변성 변경자를 붙일 수 있다.
 - 인터페이스/클래스에서 선언한 변성은 사용할 때 매번 선언할 필요는 없다.
   - ex. List는 `List<out T>`라고 선언되어 있으므로, 사용할 때는 `List<T>`라고 써도 `out`이 적용된다.
+#### 11.3.6 스타 프로젝션: 제네릭 타입 인자에 대한 정보가 없음을 표현하고자 * 사용
+- 스타 프로젝션(star projection)
+  - 원소 타입이 알려지지 않은 경우 사용
+  - ex. `List<*>`
+- `MutableList<*>`와 `MutableList<Any?>`의 차이
+  - `MutableList<*>`: 어떤 정해진 구체적인 타입의 원소만을 담는 리스트지만, 그 원소의 타입을 정확히 모름을 의미
+  - `MutableList<Any?>`: 모든 타입의 원소를 담을 수 있음을 의미
+  -
+  ```kotlin
+      val list: MutableList<Any?> = mutableListOf('a', 1, "qwe")
+      val chars = mutableListOf('a', 'b', 'c')
+      val unknown: MutableList<*> = if (Random.nextBoolean()) list else chars
+  
+      unknown.add(42) // 컴파일 에러: 메서드 호출 금지
+  ```
+- 반공변 타입 파라미터에 대한 스타 프로젝션은 `<in Nothing>`과 같기 때문에, 사용할 수 없다.
+  - 제네릭 클래스가 소비자 역할을 하는데, 정확히 어떤 대상을 소비할지 알 수 없다는 뜻이다.
+  - ex. `Consumer<*>`
+- 타입 인자에 대한 정보가 중요하지 않을 때 스타 프로젝션을 사용한다.
+  - 파라미터를 시그니터에서 전혀 언급하지 않거나 데이터를 읽기는 하지만 구체적인 타입은 신경 쓰지 않을 때 스타 프로젝션을 쓴다.
+- 스타프로젝션을 사용할 떄는 값을 만들어내는 메서드만 호출할 수 있고, 그 값의 타입에는 신경쓰지 말아야 한다.
+- 스타 프로젝션을 쓰면서 안전한 타입 캐스팅하기
+```kotlin
+object Validator {
+	private val validators = mutableMapOf<KClass<*>, FieldValidator<*>>()
+
+	// 타입을 일치시키지 않고 바로 set하는 경우와 비교하면 더 안전하다.
+	fun <T: Any> registerValidator(kClass: KClass<T>, fieldValidator: FieldValidator<T>) {
+		validators[kClass] = fieldValidator
+	}
+
+	// get에 타입 검사 로직을 집어넣어 안전성을 높인다.
+	@Suppress("UNCHECKED_CAST")
+	operator fun <T: Any> get(kClass: KClass<T>): FieldValidator<T> = 
+		validators[kClass] as? FieldValidator<T> ?: throw RuntimeException()
+}
+
+fun main() {
+	Validators.registerValidator(String::class, DefaultStringValidator)
+	Validators.registerValidator(Int::class, DefaultIntValidator)
+	Validators[String::class].validate("Kotlin")
+	Validators[Int::class].validate(42)
+}
+```
