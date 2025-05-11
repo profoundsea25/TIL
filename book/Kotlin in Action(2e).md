@@ -533,11 +533,11 @@
   - p 프로퍼티는 바로 그 위임 객체에게 자신의 작업을 위임한다.
   ```kotlin
   class Foo {
-      private val delegate = Delegate()
+    private val delegate = Delegate()
 
-      var p: Type
-          set(value: Type) = delegate.setValue(..., value)
-          get() = delegate.getValue(...)
+    var p: Type
+      set(value: Type) = delegate.setValue(..., value)
+      get() = delegate.getValue(...)
   }
   ```
   - Delegate 클래스는
@@ -578,34 +578,34 @@
 - 인자로 전달 받은 함수 호출
   - 일반 함수와 같이, 함수 이름 뒤에 괄호를 붙이고 괄호 안에 원하는 인자를 콤마(,)로 구분한다.
   ```kotlin
-      fun calculate(operation: (Int, Int) -> Int) {
-          return operation(1, 2)
-      }
+    fun calculate(operation: (Int, Int) -> Int) {
+      return operation(1, 2)
+    }
   ```
   - 파라미터 타입에도 이름을 설정할 수 있지만, 활용할 때 그 이름이 강제되지는 않는다.
   ```kotlin
-      fun calculate(operation: (first: Int, second: Int) -> Int) {
-          return operation(1, 2)
-      }
+    fun calculate(operation: (first: Int, second: Int) -> Int) {
+      return operation(1, 2)
+    }
 
-      fun main() {
-          calculate { x, y -> x + y }
-          calculate { a, b -> a * b }
-      }
+    fun main() {
+      calculate { x, y -> x + y }
+      calculate { a, b -> a * b }
+    }
   ```
   - 예시
   ```kotlin
-      fun String.filter(predicate: (Char) -> Boolean): String {
-          return buildString {
-              for (char in this) {
-                  if (predicate(char)) append(char)
-              }
-          }
+    fun String.filter(predicate: (Char) -> Boolean): String {
+      return buildString {
+        for (char in this) {
+          if (predicate(char)) append(char)
+        }
       }
+    }
 
-      fun main() {
-          "asdqwezxc".filter { it in 'a'..'n' }
-      }
+    fun main() {
+      "asdqwezxc".filter { it in 'a'..'n' }
+    }
   ```
 - 자바에서 코틀린 람다를 사용할 수 있다.
   - 다만, `Unit`을 반환하는 함수의 경우 자바에서 `Unit.INSTANCE`를 명시적으로 반환해야 한다. (`void`를 반환할 수 없다.)
@@ -616,33 +616,33 @@
   - 다른 디폴트 파라미터 값과 마찬가지로 함수 타입에 대한 기본값 선언도 = 뒤에 람다를 넣으면 된다.
   - 예시
   ```kotlin
-      fun <T> Collection<T>.joinToString(
-          separator: String = ",",
-          prefix: String = "",
-          postfix: String = "",
-          transform: (T) -> String = { it.toString() }	
-      ): String {
-          val result = StringBuilder(prefix)
-          
-          for ((index, element) in this.withIndex()) {
-              if (index > 0) result.append(separator)
-              result.append(transform(element))
-          }
-
-          result.append(postfix)
-          return result.toString()
+    fun <T> Collection<T>.joinToString(
+      separator: String = ",",
+      prefix: String = "",
+      postfix: String = "",
+      transform: (T) -> String = { it.toString() }	
+    ): String {
+      val result = StringBuilder(prefix)
+      
+      for ((index, element) in this.withIndex()) {
+        if (index > 0) result.append(separator)
+        result.append(transform(element))
       }
+
+      result.append(postfix)
+      return result.toString()
+    }
   ```
 - 함수에서 함수를 반환할 수도 있다. (생각보다 많이 쓰이지는 않는다.)
 - 람다를 활용해 중복을 줄여 코드 재사용성을 높일 수 있다.
   - 람다는 반복적인 행동을 추출할 수 있다.
   ```kotlin
-      fun List<SiteVisit>.avgDurationFor(predicate: (SiteVisit) -> Boolean) = 
-          filter(predicate).map(SiteVisit::duration).average()
+    fun List<SiteVisit>.avgDurationFor(predicate: (SiteVisit) -> Boolean) = 
+      filter(predicate).map(SiteVisit::duration).average()
 
-      // 활용
-      list.avgDurationFor { it.os in setOf(OS.IOS, OS.ANDROID) }
-      list.avgDurationFor { it.os == OS.IOS && it.path == "/signup" }
+    // 활용
+    list.avgDurationFor { it.os in setOf(OS.IOS, OS.ANDROID) }
+    list.avgDurationFor { it.os == OS.IOS && it.path == "/signup" }
   ```
 
 ### 10.2 인라인 함수를 사용해 람다의 부가 비용 없애기
@@ -671,8 +671,8 @@
 - 확장 프로퍼티만 제네릭으로 선언할 수 있다.
   - ex.
   ```kotlin
-      val <T> List<T>.first: T
-          get() = this[0]
+    val <T> List<T>.first: T
+      get() = this[0]
   ```
   - 일반 프로퍼티는 타입 파라미터를 가질 수 없다.
     - 여러 타입의 값을 클래스에 저장할 수 없기 때문이다.
@@ -690,17 +690,17 @@
   - ex. `fun <T : Number> List<T>.sum(): T` 상위 타입이 Number인 타입만 사용 가능하다.
   - 상계 타입을 정하면, 그 타입을 상계 타입의 값으로 취급할 수 있다. 메서드를 호출할 수 있다.
 ```kotlin
-	// 타입 파라미터를 제약하는 함수 선언
-	fun <T : Comparable<T>> max(first: T, seconde: T): T {
-		return if (first > second) first else second
-	}
-	
-	// 타입 파라미터에 둘 이상의 제약을 가해야 하는 경우
-	fun <T> ensureTrailingPeriod(seq: T) where T : CharSequence, T : Appendable {
-		if (!seq.endWith('.')) {
-			seq.append('.')
-		}
-	}
+  // 타입 파라미터를 제약하는 함수 선언
+  fun <T : Comparable<T>> max(first: T, seconde: T): T {
+    return if (first > second) first else second
+  }
+  
+  // 타입 파라미터에 둘 이상의 제약을 가해야 하는 경우
+  fun <T> ensureTrailingPeriod(seq: T) where T : CharSequence, T : Appendable {
+    if (!seq.endWith('.')) {
+      seq.append('.')
+    }
+  }
 ```
 #### 11.1.4 명시적으로 타입 파라미터를 널이 될 수 없는 타입으로 표시해서 널이 될 수 있는 타입 인자 제외시키기
 - 아무런 상계를 정하지 않은 타입 파라미터는 `Any?`를 상계로 정한다.
@@ -721,15 +721,15 @@
   - 인라인 함수로 바꾸면 람다 코드를 위한 익명 클래스 객체가 생성하지 않아 성능이 더 좋아질 수 있다.
 - `reified`로 지정하면 타입 파라미터의 타입을 실행 시점에도 알 수 있다.
 ```kotlin
-	inline fun <reified T> Iterable<*>.filterIsInstance(): List<T> {
-		val destination = mutableListOf<T>()
-		for (element in this) {
-			if (element is T {
-				destination.add(element)
-			}
-		}
-		return destination
-	}
+  inline fun <reified T> Iterable<*>.filterIsInstance(): List<T> {
+    val destination = mutableListOf<T>()
+    for (element in this) {
+      if (element is T {
+        destination.add(element)
+      }
+    }
+    return destination
+  }
 ```
 - 인라인 함수에서만 실체화된 타입 인자를 쓸 수 있는 이유
   - 컴파일러는 인라인 함수의 본문을 구현한 바이트코드를 그 함수가 호출되는 모든 지점에 삽입한다.
@@ -749,14 +749,14 @@ val serviceImpl = ServiceLoader.load(Service::class.java)
 val serviceImpl = loadService<Service>()
 
 inline fun <reified T> loadService() {
-	return ServiceLoader.load(T::class.java)
+  return ServiceLoader.load(T::class.java)
 }
 ```
 #### 11.2.4 실체화된 타입 파라미터가 있는 접근자 정의
 - 제네릭 타입에 대해 프로퍼티 접근자를 정의하는 경우 프로퍼티를 `inline`으로 표시하고 타입 파라미털르 `reified`로 하면 타입 인자에 쓰인 구체적인 클래스를 참조할 수 있다.
 ```kotlin
 inline val <reified T> T.canonical: String
-	get() = T::class.java.canonicalName
+  get() = T::class.java.canonicalName
 ```
 #### 11.2.5 실체화된 타입 파라미터의 제약
 - 할 수 있는 것
@@ -800,20 +800,19 @@ inline val <reified T> T.canonical: String
 - 반공변성(contravariance)을 가진 클래스의 하위 타입 관계는 그 클래스의 타입 파라미터의 상하위 타입 관계와 반대다.
   - ex. `Comparator`
   ```kotlin
-      interface Comparator<in T> {
-          fun compare(e1: T, e2: T): Int
-      }
+    interface Comparator<in T> {
+      fun compare(e1: T, e2: T): Int
+    }
   ```
   - T 타입의 값을 소비하기만 한다. 즉, T가 `in` 위치에서만 쓰인다. 따라서 T 앞에는 `in` 키워드가 붙는다.
 - 타입 B가 타입 A의 하위 타입일 때, `Consumer<A>`가 `Consumer<B>`의 하위 타입인 관계가 성립한다면 제네릭 클래스는 타입 인자 T에 대해 반공변이다.
 - `in` 키워드가 붙은 타입이 이 클래스의 메서드 안으로 전달돼 메서드에 의해 소비된다는 뜻이다.
   - 그 타입 인자를 오직 `in` 위치에서만 사용할 수 있다.
 - 클래스나 인터페이스가 어떤 타입 파라미터에 대해서는 공변적이면서 다른 타입 파라미터에 대해서는 반공변적일 수 있다.
-  - 
   ```kotlin
-      interface Function1<in P, out R> {
-          operator fun invoke(p: P): R
-      }
+    interface Function1<in P, out R> {
+      operator fun invoke(p: P): R
+    }
   ```
 #### 11.3.5 사용 지점 변성을 사용해 타입이 언급되는 지점에서 변성 지정
 - 선언 지점 변성(declaration site variance)
@@ -823,26 +822,26 @@ inline val <reified T> T.canonical: String
   - 코틀린도 사용 지점 변성을 지원한다.
 - ex.
 ```kotlin
-	// 무공변 파라미터 타입을 사용하는 데이터 복사 함수
-	fun <T> copyData(source: MutableList<T>, destination: MutableList<T>) {
-		for (item in source) {
-			destination.add(item)
-		}
-	}
-	
-	// 타입 파라미터가 둘인 데이터 복사 함수
-	fun <T: R, R> copyData(source: MutableList<T>, destination: MutableList<R>) {
-		for (item in source) {
-			destination.add(item)
-		}
-	}
-	
-	// 아웃-프로젝션 타입 파라미터를 사용하는 데이터 복사 함수
-	fun <T> copyData(source: MutableList<out T>, destination: MutableList<T>) {
-		for (item in source) {
-			destination.add(item)
-		}
-	}
+  // 무공변 파라미터 타입을 사용하는 데이터 복사 함수
+  fun <T> copyData(source: MutableList<T>, destination: MutableList<T>) {
+    for (item in source) {
+      destination.add(item)
+    }
+  }
+  
+  // 타입 파라미터가 둘인 데이터 복사 함수
+  fun <T: R, R> copyData(source: MutableList<T>, destination: MutableList<R>) {
+    for (item in source) {
+      destination.add(item)
+    }
+  }
+  
+  // 아웃-프로젝션 타입 파라미터를 사용하는 데이터 복사 함수
+  fun <T> copyData(source: MutableList<out T>, destination: MutableList<T>) {
+    for (item in source) {
+      destination.add(item)
+    }
+  }
 ```
 - 타입 선언에서 타입 파라미터를 사용하는 위치라면 어디에나 변성 변경자를 붙일 수 있다.
 - 인터페이스/클래스에서 선언한 변성은 사용할 때 매번 선언할 필요는 없다.
@@ -856,11 +855,11 @@ inline val <reified T> T.canonical: String
   - `MutableList<Any?>`: 모든 타입의 원소를 담을 수 있음을 의미
   -
   ```kotlin
-      val list: MutableList<Any?> = mutableListOf('a', 1, "qwe")
-      val chars = mutableListOf('a', 'b', 'c')
-      val unknown: MutableList<*> = if (Random.nextBoolean()) list else chars
-  
-      unknown.add(42) // 컴파일 에러: 메서드 호출 금지
+    val list: MutableList<Any?> = mutableListOf('a', 1, "qwe")
+    val chars = mutableListOf('a', 'b', 'c')
+    val unknown: MutableList<*> = if (Random.nextBoolean()) list else chars
+
+    unknown.add(42) // 컴파일 에러: 메서드 호출 금지
   ```
 - 반공변 타입 파라미터에 대한 스타 프로젝션은 `<in Nothing>`과 같기 때문에, 사용할 수 없다.
   - 제네릭 클래스가 소비자 역할을 하는데, 정확히 어떤 대상을 소비할지 알 수 없다는 뜻이다.
@@ -871,24 +870,24 @@ inline val <reified T> T.canonical: String
 - 스타 프로젝션을 쓰면서 안전한 타입 캐스팅하기
 ```kotlin
 object Validator {
-	private val validators = mutableMapOf<KClass<*>, FieldValidator<*>>()
+  private val validators = mutableMapOf<KClass<*>, FieldValidator<*>>()
 
-	// 타입을 일치시키지 않고 바로 set하는 경우와 비교하면 더 안전하다.
-	fun <T: Any> registerValidator(kClass: KClass<T>, fieldValidator: FieldValidator<T>) {
-		validators[kClass] = fieldValidator
-	}
+  // 타입을 일치시키지 않고 바로 set하는 경우와 비교하면 더 안전하다.
+  fun <T: Any> registerValidator(kClass: KClass<T>, fieldValidator: FieldValidator<T>) {
+    validators[kClass] = fieldValidator
+  }
 
-	// get에 타입 검사 로직을 집어넣어 안전성을 높인다.
-	@Suppress("UNCHECKED_CAST")
-	operator fun <T: Any> get(kClass: KClass<T>): FieldValidator<T> = 
-		validators[kClass] as? FieldValidator<T> ?: throw RuntimeException()
+  // get에 타입 검사 로직을 집어넣어 안전성을 높인다.
+  @Suppress("UNCHECKED_CAST")
+  operator fun <T: Any> get(kClass: KClass<T>): FieldValidator<T> = 
+    validators[kClass] as? FieldValidator<T> ?: throw RuntimeException()
 }
 
 fun main() {
-	Validators.registerValidator(String::class, DefaultStringValidator)
-	Validators.registerValidator(Int::class, DefaultIntValidator)
-	Validators[String::class].validate("Kotlin")
-	Validators[Int::class].validate(42)
+  Validators.registerValidator(String::class, DefaultStringValidator)
+  Validators.registerValidator(Int::class, DefaultIntValidator)
+  Validators[String::class].validate("Kotlin")
+  Validators[Int::class].validate(42)
 }
 ```
 #### 11.3.7 타입 별명
