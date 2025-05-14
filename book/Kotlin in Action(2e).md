@@ -964,3 +964,11 @@ fun main() {
   - 어노테이션 클래스를 소스 수준에서 유지할지, .class 파일에 저장할지, 실행 시점에 리플렉션을 사용해 접근할 수 있게 할지 정하는 메타 어노테이션
   - 자바 컴파일러는 기본적으로 .class 파일에 저장한다. (그래서 런타임에는 사용할 수 없다.)
   - 대부분의 어노테이션은 런타임에도 사용할 수 있어야 하므로 코틀린의 기본값은 `RUNTIME`이다.
+#### 12.1.6 어노테이션 파라미터로 클래스 사용
+```kotlin
+annotation class SomeAnnotation(val targetClass: KClass<out Any>)
+```
+#### 12.1.7 어노테이션 파라미터로 제네릭 클래스 받기
+```kotlin
+annotation class SomeAnnotation(val targetClass: KClass<out SomeClass<*>>)
+```
