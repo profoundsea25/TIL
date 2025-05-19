@@ -926,7 +926,7 @@ fun main() {
 - 리플렉션: 실행 시점에 컴파일러 내부 구조를 분석
 
 ### 12.1 어노테이션 선언과 적용
-- 어노테이션을 사용하면 선언에 추가ㅏ적인 메타데이터를 연관시킬 수 있다.
+- 어노테이션을 사용하면 선언에 추가적인 메타데이터를 연관시킬 수 있다.
 - 어노테이션이 설정된 방식에 따라 메타데이터를 소스코드, 컴파일된 클래스 파일, 런타임에 대해 작동하는 도구를 통해 접근할 수 있다.
 #### 12.1.1 어노테이션을 적용해 선언에 표지 남기기
 - 어노테이션을 적용하려면 `@`와 어노테이션 이름을 선언 앞에 넣으면 된다.
@@ -957,15 +957,15 @@ fun main() {
   - `@JsonName`: 프로퍼티를 표현하는 키 값을 임의의 문자열로 표현
 #### 12.1.4 어노테이션 선언
 - `class` 키워드 앞에 `annotation`을 붙인다.
-```kotlin
-	annotation class JsonExclude
-```
+  ```kotlin
+      annotation class JsonExclude
+  ```
 - 어노테이션 클래스는 선언이나 식과 관련 있는 메타데이터의 구조만 정의하기 때문에 내부에 아무 코드도 들어있을 수 없다. 따라서 본문을 정의할 수 없다.
 - 파라미터가 있는 어노테이션을 정의하려면 어노테이션 클래스의 주 생성자에 파라미터를 선언해야 한다.
   - 모든 파라미터를 `val`로 선언해야 한다.
-```kotlin
-	annotation class JsonName(val name: String)
-```
+  ```kotlin
+      annotation class JsonName(val name: String)
+  ```
 - 자바 어노테이션과 비교
   - `value` 라는 메서드가 기본적으로 있다.
   - 어노테이션을 적용할 때, `value`를 제외한 모든 애트리뷰트에는 이름을 명시해야 한다.
@@ -978,10 +978,10 @@ fun main() {
   - `@Target`을 지정하지 않으면 모든 선언에 적용할 수 있는 어노테이션이 된다.
   - 메타 어노테이션을 만들어야 한다면 `AnnotationTarget.ANNOTATION_CLASS`를 사용
   - `AnnotationTarget.PROPERTY`로 지정한 어노테이션을 자바 코드에서는 사용할  수 없다.
-```kotlin
-	@Target(AnnotationTarget.PROPERTY)
-	annotation class JsonExclude
-```
+  ```kotlin
+      @Target(AnnotationTarget.PROPERTY)
+      annotation class JsonExclude
+  ```
 - `@Retention`
   - 어노테이션 클래스를 소스 수준에서 유지할지, .class 파일에 저장할지, 실행 시점에 리플렉션을 사용해 접근할 수 있게 할지 정하는 메타 어노테이션
   - 자바 컴파일러는 기본적으로 .class 파일에 저장한다. (그래서 런타임에는 사용할 수 없다.)
@@ -994,3 +994,46 @@ annotation class SomeAnnotation(val targetClass: KClass<out Any>)
 ```kotlin
 annotation class SomeAnnotation(val targetClass: KClass<out SomeClass<*>>)
 ```
+
+### 12.2 리플렉션: 실행 시점에 코틀린 객체 내부 관찰
+- 리플렉션
+  - 실행 시점에 객체의 프로퍼티와 메서드에 접근할 수 있게 해주는 방법
+  - 타입과 관계없이 객체를 다뤄야 하거나 객체가 제공하는 메서드나 프로퍼티 이름을 오직 실행 시점에만 알 수 있는 경우 사용
+#### 12.2.1 코틀린 리플렉션 API: `KClass`, `KCallable`, `KFunction`, `KProperty`
+- `KClass`
+  - 클래스 안에 있는 모든 선언을 열거하고 각 선언에 접근하거나 클래스의 상위 클래스를 얻는 등의 작업이 가능하다.
+  - `SomeClass::class` 형식으로 KClass의 인스턴스를 얻을 수 있다.
+- `KCallable`
+  - 함수와 프로퍼티를 아우르는 공통 상위 인터페이스
+  - 그 안에 `call` 메서드가 있으며, 이를 사용해 함수나 프로퍼티의 getter를 호출할 수 있다.
+    - `call`에는 함수 인자를 vararg 로 받는다.
+    - `call`은 함수 인자가 선언한 것과 정확히 동일해야 한다.
+  ```kotlin
+      fun foo(x: Int) = println(x)
+
+      fun main() {
+          val kFunction = ::foo
+          kFunction.call(42)
+      }
+  ```
+- `KFunctionN : KCallable`
+  - 컴파일러가 생성하는 합성 타입
+  - `KFunctionN`은 `KFunction`을 확장한다.
+  - N과 파라미터 개수가 같은 invoke를 추가로 포함한다.
+- `KProperty : KCallable`
+  - `call`은 프로퍼티의 getter를 호출한다.
+  - 프로퍼티 값을 얻기 더 좋은 방법은 `get` 메서드를 사용하는 것이다.
+  - 최상위 프로퍼티의 경우, 읽기 전용(val)은 `KProperty0`으로, 가변(var)은 `KMutableProperty0` 인터페이스의 인스턴스로 표현되며, 둘 다 인자가 없는 `get`메서드를 제공한다.
+  - 멤버 프로퍼티는 `KProperty1`이나 `MutablePropery1` 인스턴스로 표현된다. 그 안에는 인자가 1개인 `get` 메서드가 들어있다.
+    - `get` 메서드를 통해 프로퍼티 값을 얻으려면 값을 얻을 수신 객체 인스턴스를 넘겨야 한다.
+  ```kotlin
+      class Person(val name: String, val age: Int)
+
+      fun main() {
+          val person = Person("Alice", 29)
+          val memberProperty = Person::age
+          println(memberProperty.get(person))
+      }
+  ```
+- 최상위 수준이나 클래스 안에 정의된 프로퍼티만 리플렉션으로 접근할 수 있다.
+  - 함수의 로컬 변수에는 접근할 수 없다.
