@@ -1037,3 +1037,61 @@ annotation class SomeAnnotation(val targetClass: KClass<out SomeClass<*>>)
   ```
 - 최상위 수준이나 클래스 안에 정의된 프로퍼티만 리플렉션으로 접근할 수 있다.
   - 함수의 로컬 변수에는 접근할 수 없다.
+#### 12.2.2 리플렉션을 사용해 객체 직렬화 구현
+```kotlin
+// StringBuilder 확장함수로 구현하는 이유는, `append`와 같은 메서드를 간결하게 호출하기 위함.
+private fun StringBuilder.serializeObject(obj: Any) {
+	val kClass = obj::class as KClass<Any>
+	val properties = kClass.memberProperties
+
+	properties.joinToStringBuilder(
+		this,
+		prefix = "{",
+		postfix = "}",
+	) { prop -> // prop의 타입은 KProperty1<Any, *>
+		serializeString(prop.name)
+		append(": ")
+		serializePropertyValue(prop.get(obj)) // prop.get(obj) 타입은 Any?
+	}
+}
+```
+#### 12.2.3 어노테이션을 활용해 직렬화 제어
+- 프로퍼티에 선언된 어노테이션을 접근하려면, `KProperty`의 `annotations` 프로퍼티 혹은 `findAnnotation()` 메서드를 사용할 수 있다.
+```kotlin
+// 프로퍼티 필터링을 포함하는 객체 직렬화
+private fun StringBuilder.serializeObject(obj: Any) {
+	(obj::class as KClass<Any>)
+		.memberProperties
+		.filter { it.findAnnotation<JsonExclude>() == null }
+		.joinToStringBuilder(this, prefix = "{", postfix = "}") {
+			serializeProperty(it. obj)
+		}
+}
+
+// 하나의 프로퍼티 직렬화하기
+private fun StringBuilder.serializeProperty(
+	prop: KProperty1<Any, *>, obj: Any
+) {
+	val jsonNameAnn = prop.findAnnotation<JsonName>()
+	val propName = jsonNameAnn?.name ?: prop.name
+	serializeString(propName)
+	append(": ")
+	val value = prop.get(obj)
+	val jsonValue = prop.getSerializer()?.toJsonValue(value) ?: value
+	serializePropertyValue(jsonValue)
+}
+
+// 프로퍼티의 값을 직렬화하는 직렬화기 가져오기
+fun KProperty<*>.getSerializer(): ValueSerializer<Any?>? {
+	val customSerializerAnn = findAnnotation<CustomSerializer>()
+		?: return null
+	val serializerClass = customSerializerAnn.serializerClass
+	val valueSerializer = serializerClass.objectInstance
+		?: serializerClass.createInstance()
+	@Suppress("UNCHECKED_CAST")
+	return valueSerializer as ValueSerializer<Any?>
+}
+```
+- 일반 클래스와 object 클래스는 모두 `KClass`로 표현된다.
+  - 다만 object로 선언된 싱글턴 객체는 `objectInstance` 프로퍼티가 null이 아니다.
+  - 일반 객체는 인스턴스에 접근하려면 `createInstance()`로 새 인스턴스를 만들어야 한다.
