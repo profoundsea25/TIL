@@ -1095,3 +1095,16 @@ fun KProperty<*>.getSerializer(): ValueSerializer<Any?>? {
 - 일반 클래스와 object 클래스는 모두 `KClass`로 표현된다.
   - 다만 object로 선언된 싱글턴 객체는 `objectInstance` 프로퍼티가 null이 아니다.
   - 일반 객체는 인스턴스에 접근하려면 `createInstance()`로 새 인스턴스를 만들어야 한다.
+#### 12.2.5 callBy()와 리플렉션
+- `KCallable.call`은 디폴트 파라미터를 지원하지 않는다. 따라서 디폴트 파라미터를 지원하는 `KCallable.callBy`를 사용해야 한다.
+  ```kotlin
+      interface KCallable<out R> {
+          fun callBy(args: Map<KParameter, Any?>): R
+      }
+  ```
+- `callBy` 메서드
+  - 파라미터와 해당하는 값을 연결해주는 맵을 인자로 받는다.
+  - 파라미터 순서를 지킬 필요가 없다.
+  - 맵에 없으면 파라미터 기본값을 사용한다.
+  - 최종적으로 객체의 주 생성자를 호출한다.
+- `Ktype` 실행 시점의 표현을 얻으려면 `typeOf<T>()` 함수를 사용하면 된다.
