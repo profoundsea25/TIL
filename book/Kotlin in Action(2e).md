@@ -675,6 +675,68 @@
   - 인라이닝한 함수의 크기가 큰 경우 함수 본문에 해당하는 바이트코드를 모든 호출 지점에 복사해 넣으면 바이트코드가 전체적으로 아주 커질 수 있다.
   - 그럴 경우 람다 인자와 무관한 코드를 별도의 비인라인 함수로 빼낼 수 있다.
   - 코틀린 표준 라이브러리가 제공하는 인라인 함수들은 모두 크기가 아주 작다.
+#### 10.2.5 withLock, use, useLines로 자원 관리를 위해 인라인된 람다 사용
+- `withLock`: 락을 획득 후 작업하고, 락을 해제하는 함수
+  ```kotlin
+      val l. Lock = ReentrantLock()
+      l.withLock{
+           // 락에 의해 보호되는 자원 사용
+      }
+  
+      fun <T> Lock.withLock(action: () -> T): T {
+          lock()
+          try {
+              return action()
+          } finally {
+              unlock()
+          }
+      }
+  ```
+- `use`: 닫을 수 있는(Closable을 구현한 객체)에 대해 호출하는 인라인 확장 함수
+  - 람다를 호출하고 사용 후 자원이 확실히 닫히게 한다. 람다가 정상적으로 끝났는지 예외를 던졌는지 관계 없다.
+  - 코틀린에서는 `try-with-resources`가 없다. 코틀린에서는 `use` 함수가 있기 때문이다.
+  ```kotlin
+      fun readFirstFromFile(fileName: String): String {
+          BufferedReader(FileReader(fileName))
+              .use { br -> return br.readLine() }
+      }
+  ```
+- `useLines`: `File`과 `Path`에 대해 정의돼 있고, 람다가 문자열 시퀀스에 접근한다.
+  ```kotlin
+      fun readFirstLineFromFile(fileName: String): String {
+          Path(fileName).useLines {
+              return it.first()
+          }
+      }
+  ```
+
+### 10.3 람다에서 변환: 고차 함수에서 흐름 제어
+#### 10.3.1 람다 안의 return 문: 람다를 둘러싼 함수에서 반환
+- 인라인 함수의 람다 안에서 `return`을 사용하면 람다에서만 반환되는 것이 아니라, 그 람다를 호출하는 함수가 실행을 끝내고 반환된다. 이를 비지역적 return(non-local return)이라고 한다.
+- 인라이닝되지 않은 함수에 전달되는 람다 안에서 `return`을 사용할 수 없다.
+#### 10.3.2 람다로부터 반환: 레이블을 사용한 `return`
+- 람다 안에서 지역적 `return`은 `for` 루프의 `break`과 비슷한 역할을 한다. 람다의 실행을 끝내고 람다를 호출했던 코드의 실행을 계속 이어간다. 이를 비지역적 `return`과 구분하기 위해 레이블을 사용해야 한다.
+  - `return`으로 실행을 끝내고 싶은 람다식 앞에 레이블을 붙이고, `return` 키워드 뒤에 그 레이블을 추가한다.
+  ```kotlin
+      // 람다에 레이블을 붙이는 경우
+      fun lookFor(people: List<Person>) {
+          people.forEach someLabel@{
+              if (it.name != "Alice") return@someLabel
+              print("Found!")
+          }
+      }
+      
+      // 람다에 레이블이 없는 경우
+      fun lookFor(people: List<Person>) {
+          people.forEach {
+              if (it.name != "Alice") return@forEach
+              print("Found!")
+          }
+      }
+  ```
+- 람다식의 레이블을 명시하면 함수 이름을 레이블로 사용할 수 없다.
+- 람다식에는 레이블이 2개 이상 붙을 수 없다.
+- `this`도 똑같은 방법으로 사용할 수 있다.
 
 
 ## 11장. 제네릭스
