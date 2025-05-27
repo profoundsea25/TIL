@@ -1202,3 +1202,47 @@ fun KProperty<*>.getSerializer(): ValueSerializer<Any?>? {
       - 실행 엔진이 결과를 얻는 과정을 전체적으로 한꺼번에 최적화하기 때문에 선언적 언어가 더 효율적인 경우가 자주 있다.
 - DSL은 큰 단점이 있는데, 범용 언어로 만든 호스트 애플리케이션과 DSL을 함께 조합하기 어렵다는 것이다.
   - 이를 해결하기 위해 코틀린은 코틀린 내부에서 DSL을 만들 수 있도록 설계되었다.
+#### 13.1.3 DSL의 구조
+- DSL의 특징은 구조(문법)이다. 그래서 언어라고 부를 수 있다.
+- 전형적인 라이브러리는 여러 메서드로 이뤄지며 클라이언트는 그런 메서드를 한 번에 하나씩 호출함으로써 사용한다.
+- 코틀린 DSL에서는 보통 람다를 내포시키거나 메서드 호출을 연쇄시키는 방식으로 구조를 만든다.
+
+### 13.2 구조화된 API 구축: DSL에서 수신 객체 지정 람다 사용
+#### 13.2.1 수신 객체 지정 람다와 확장 함수 타입
+- 수신 객체 지정 람다를 사용하는 이유는, 람다에서 자기 자신에 대한 호출을 생략해서 표현하고자 함이다.
+- 람다를 선언할 때, 일반 함수 타입 대신 확장 함수 타입을 사용하여 구현할 수 있다.
+```kotlin
+// 일반 람다
+fun buildString(
+	action: (StringBuilder) -> Unit
+): String {
+	val sb = StringBuilder()
+	action(sb)
+	return sb.toString()
+}
+
+// 활용
+fun main() {
+	val s = buildString {
+		it.append("1")
+		it.append("2")
+	}
+}
+
+// 수신 객체 지정 람다
+fun buildString(
+	action: StringBuilder.() -> Unit
+): String {
+	val sb = StringBuilder()
+	sb.action()
+	return sb.toString()
+}
+
+// 활용
+fun main() {
+	val s = buildString {
+		append("1")
+		append("2")
+	}
+}
+```
