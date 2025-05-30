@@ -1271,3 +1271,35 @@ fun createSimpleTable() = createHTML().table {
 - `operator fun invoke(...)`를 정의하면 `SomeClass()` 같은 형식으로 사용할 수 있다.
 - `invoke` 메서드 시그니처에 대한 요구 사항은 없다. 원하는 대로 파라미터 개수나 타입을 지정할 수 있다.
   - 오버로딩한 여러 시그니처를 모두 다 활용할 수 있다.
+#### 13.3.2 DSL의 `invoke` 관례: 그레이들 의존관계 선언
+- 내포된 블록 구조를 허용하는 한편, 평평한 함수 호출 구조도 함께 제공하는 API를 만들고 싶은 경우
+```kotlin
+class DependencyHandler {
+	fun implementation(coordinate: String) { /* do something */}
+	
+	operator fun invoke(body: DependencyHandler.() -> Unit) {
+		body()
+	}
+}
+
+fun main() {
+	val dependecies = DependencyHandler()
+
+	dependencies.implementation("...")
+	
+	// dependencies 안에 람다를 받는 `invoke` 메서드를 정의하면 호출할 수 있다.
+	// 완전히 풀어쓰면 dependencies.invoke({...})이 된다.
+	dependencies {
+		implementation("...")
+	}	
+}
+```
+
+### 13.4 실전 코틀린 DSL
+#### 13.4.1 중위 호출 연쇄시키기: 테스트 프레임워크의 `should` 함수
+- 깔끔한 DSL을 만들려면 코드에 쓰이는 기호의 수를 줄여야 한다.
+- 중위 함수
+```kotlin
+// from kotest
+infix fun <T> T.should(matcher: Matcher<T>) = matcher.test(this)
+```
