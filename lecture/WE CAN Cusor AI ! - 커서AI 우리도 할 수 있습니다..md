@@ -47,3 +47,7 @@
 - 프롬프트에 "깊이 생각하여 ~해주세요" 써보기.
 - Claude Desktop으로 MCP 사용 추천
 - MCP = AI가 외부 리소스에 접근하기 위한 표준 프로토콜
+
+### MCP Server 사이트
+- [smithery.ai](http://smithery.ai/)
+- [mcp.so](http://mcp.so/)
