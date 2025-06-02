@@ -1303,3 +1303,17 @@ fun main() {
 // from kotest
 infix fun <T> T.should(matcher: Matcher<T>) = matcher.test(this)
 ```
+#### 13.4.3 멤버 확장 함수: SQL을 위한 내부 DSL
+- 멤버 확장(member extension)
+  - 클래스 안에서 확장 함수와 확장 프로퍼티를 선언
+  - 선언된 클래스의 멤버인 동시에 그들이 확장하는 다른 타입의 멤버이기도 하다.
+  - 클래스 영역 바깥에서는 멤버 확장 프로퍼티/메서드를 사용할 수 없다.
+    - = 메서드/프로퍼티가 적용되는 범위를 제한할 수 있다.
+    - = 각 함수를 사용할 수 있는 맥락을 제어할 수 있다.
+- 예제: `Exposed`
+```kotlin
+class Table {
+	// Table 클래스 또는 Table을 상속받은 클래스 내에서만 사용할 수 있다.
+	fun Column<Int>.autoIncrement(): Column<Int>
+}
+```
