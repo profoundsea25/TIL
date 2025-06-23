@@ -182,3 +182,16 @@
   - 환경 제어가 힘들다.
   - 기존 코드가 TDD를 적용하기 어려울 수 있다.
   - 프로젝트가 TDD의 손익 분기점을 넘기지 못할 수 있다.
+
+## 네트워크 용어 정리 (1) : DNS, LB, FQDN 등
+- 도메인 : 네트워크 상에서 컴퓨터를 식별하는 호스트명
+- DNS : 호스트의 도메인 이름을 호스트의 네트워크 주소로 바꾸거나 그 반대의 변환을 수행할 수 있다.
+- VIP : Virtual IP. 대표 IP(가상 IP). 로드 밸런싱도 수행
+- LB : Load Balancing. 부하 분산
+- SLB : Server Load Balancing. 사실상 로드 밸런서와 동일한 말
+- GSLB : Global Server Load Balancing
+  - 지역을 넘나드는 LB
+  - LB기 때문에 도메인을 가진다.
+  - LB의 Health Check 기능도 있다.
+- L7 로드밸런싱 : URI나 Http 값을 기준으로 로드밸런싱 하는 것
+- FQDN : 도메인은 기본적으로 서브도메인(ex. www)를 갖는다. 이러한 서브도메인을 기준으로 구분한 도메인을 FQDN(full quailified domain name)이라고 한다.
