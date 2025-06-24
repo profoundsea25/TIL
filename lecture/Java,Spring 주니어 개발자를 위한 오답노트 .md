@@ -195,3 +195,19 @@
   - LB의 Health Check 기능도 있다.
 - L7 로드밸런싱 : URI나 Http 값을 기준으로 로드밸런싱 하는 것
 - FQDN : 도메인은 기본적으로 서브도메인(ex. www)를 갖는다. 이러한 서브도메인을 기준으로 구분한 도메인을 FQDN(full quailified domain name)이라고 한다.
+
+## 네트워크 용어 정리 (2) : CDN, ACL, Proxy, SSL 등
+- CDN : Content Delivery Network
+  - 콘텐츠를 효율적으로 전달하기 위해 여러 노드를 가진 네트워크에 데이터를 저장하여 제공하는 시스템
+- ACL : Access Control List
+  - 액세스 제어 목록은 개체나 개체 속성에 적용되어 있는 허가 목록이다.
+  - 네트워크에 접근을 허가하는 IP 목록
+- Proxy : 클라이언트가 자신을 통해서 다른 네트워크 서비스에 간접적으로 접속할 수 있게 해주는 컴퓨터/응용 프로그램
+  - 포워드 프록시 = 일반적으로 Proxy
+  - 리버스 프록시 = 부하 분산
+- Web Server
+  - html, css 내려주는 역할
+  - proxy 역할
+- SSL
+  - HTTPS를 사용할 수 있게 하는 프로토콜
+  - 향상된 버전 = TLS
