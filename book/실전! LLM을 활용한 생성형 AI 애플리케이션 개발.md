@@ -151,3 +151,29 @@
 - 환각 방지에 효과적임.
 
 ## 05. 애플리케이션에 LLM 통합하기.
+- 책에서는 랭체인 프레임워크와 일반적으로 LLM 개발 환경에서 견고하게 유지되는 백본 개념(메모리, 벡터DB, 에이전트 등)에 대해 다룸
+
+### 5.2 랭체인 시작하기
+- 랭체인은 애플리케이션 내에서 LLM과 그 구성 요소를 쉽게 통합하고 오케스트레이션할 수 있도록 하는 경량 프레임워크
+  - 주요 구성 요소: 모델 및 프롬프트 템플릿, 데이터 연결, 메모리, 체인, 에이전트
+#### 5.2.1 모델과 프롬프트
+- 랭체인은 OpenAI, 허깅페이스 허브 및 오픈소스 LLM 세계와의 통합을 지원
+```python
+# OpenAI 모델 사용해보기
+from langchian_openai import OpenAI
+llm = OpenAI(openai_api_key="apikey")
+llm.invoke('do something')
+```
+- 프롬프트 템플릿
+  - 언어 모델에 대한 프롬프트를 생성하는 방법을 정의하는 구성 요소
+  - 변수, 플레이스홀더, 앞부분(prefix), 끝부분(suffix), 데이터와 과업에 따라 맞춤화할 수 있는 기타 요소를 포함.
+  - 일반적으로 프롬프트 템플릿은 LLM의 종류에 구애받지 않음.
+  ```python
+  from langchain import PromptTemplate
+  template = """문장: {sentence} -> {language}로 번역:"""
+  prompt = PromptTemplate(template=template, input_variable=["sentence", "language"])
+  prompt.format(sentence="고양이가 탁자 위에 있다.", language="영어")
+  ```
+- 예제 선택기
+  - 언어 모델에 대한 프롬프트에 포함할 예제를 선택할 수 있는 랭체인 구성 요소
+  - 언어 모델이 원하는 출력을 생성하도록 안내하는 텍스트 입력.
