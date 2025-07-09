@@ -1,4 +1,5 @@
 # [Kotlin in Action(2/e)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=358099845)
+- https://livebook.manning.com/book/kotlin-in-action-second-edition
 - 지은이: 세바스티안 아이그너, 로만 엘리자로프, 스베트라나 이사코바, 드미트리 제메로프
 - 옮긴이: 오현석
 - 출판사: 에이콘출판
@@ -1608,3 +1609,69 @@ fun main() = runBlocking {
   - 플로우에서 배출된 각 원소에 대해 호출될 람다를 제공할 수 있다.
   - 일시 중단 함수다. (플로우 내부의 일시 중단 코드를 실행하므로)
   - 람다도 일시 중단될 수 있기 떄문에 다른 일시 중단 함수를 호출할 수 있다.
+```kotlin
+val letters = flow {
+   log("Emitting A!")
+   emit("A")
+   delay(200.milliseconds)
+   log("Emitting B!")
+   emit("B")
+}
+```
+
+```kotlin
+fun main() = runBlocking {
+   letters.collect {
+       log("Collecting $it")
+       delay(500.milliseconds)
+   }
+}
+
+// 27 [main @coroutine#1] Emitting A!
+// 38 [main @coroutine#1] Collecting A
+// 757 [main @coroutine#1] Emitting B!
+// 757 [main @coroutine#1] Collecting B
+```
+- 콜드 플로우에서 `collect`를 여러 번 호출하면 그 코드가 여러 번 실행된다.
+```kotlin
+fun main() = runBlocking {
+   letters.collect {
+       log("(1) Collecting $it")
+       delay(500.milliseconds)
+   }
+   letters.collect {
+       log("(2) Collecting $it")
+       delay(500.milliseconds)
+   }
+}
+
+// 23 [main @coroutine#1] Emitting A!
+// 33 [main @coroutine#1] (1) Collecting A
+// 761 [main @coroutine#1] Emitting B!
+// 762 [main @coroutine#1] (1) Collecting B
+// 1335 [main @coroutine#1] Emitting A!
+// 1335 [main @coroutine#1] (2) Collecting A
+// 2096 [main @coroutine#1] Emitting B!
+// 2096 [main @coroutine#1] (2) Collecting B
+```
+- `collect` 함수는 플로우의 모든 원소가 처리될 때까지 일시 중단된다.
+#### 16.2.3 플로우 수집 취소
+- 수집자의 코루틴을 취소하면 다음 취소 지점에서 플로우 수집이 중단된다.
+  - `emit`도 취소와 일시 중단 지점이다.
+```kotlin
+fun main() = runBlocking {
+   val collector = launch {
+       counterFlow.collect {
+           println(it)
+       }
+   }
+   delay(5.seconds)
+   collector.cancel()
+}
+
+// 1 2 3 ... 24
+```
+#### 16.2.4 콜드 플로우의 내부 구현
+- 콜드 플로우는 일시 중단 함수와 수신 객체 지정 람다를 결합한 똑똑한 조합이다.
+  ![collect 내부 시퀀스](https://drek4537l1klr.cloudfront.net/isakova/HighResolutionFigures/figure_16-2.png)
+#### 16.2.5 채널 플로우를 사용한 동시성 플로우
