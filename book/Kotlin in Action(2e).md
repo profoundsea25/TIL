@@ -1675,3 +1675,67 @@ fun main() = runBlocking {
 - 콜드 플로우는 일시 중단 함수와 수신 객체 지정 람다를 결합한 똑똑한 조합이다.
   ![collect 내부 시퀀스](https://drek4537l1klr.cloudfront.net/isakova/HighResolutionFigures/figure_16-2.png)
 #### 16.2.5 채널 플로우를 사용한 동시성 플로우
+-채널 플로우(`channel flow`)
+- 채널 플로우는 동시 작업이라는 구체적인 용례를 위해 설계되었다.
+- 여러 코루틴에서 배출을 허용하는 동시성 필로우
+- 여러 코루틴에서 `emit`대신 `send`를 사용하여 값을 제공할 수 있다.
+- 플로우의 수집자는 여전히 값을 순차적으로 수집하며, `collect` 람다가 그 작업을 수행한다.
+- `channelFlow`의 람다는 새로운 백그라운드 코루틴을 시작할 수 있는 코루틴 스코프를 제공한다.
+- 내부적으로 또 다른 동시성 기본 요소인 채널을 관리해야 하기 때문에 생성하는 데 비용이 있다.
+- 일반적으로 기본적인 콜드 플로우(`flow`)는 가장 간단하고 성능이 좋은 추상화다.
+  - 콜드 플로우(`flow`)는 순차적으로 실행되고, 같은 코루틴에서 실행된다.
+  - 기본적인 콜드 플로우 추상화는 같은 코루틴 안에서만 `emit` 함수를 호출할 수 있게 허용한다.
+  - 엄격하게 순차적으로 실행된다.
+  - 새로운 코루틴을 실행할 수 없지만, 아주 쉽게 생성할 수 있다.
+  - 인터페이스가 한 가지로 구성되며, 관리해야 할 추가적인 원소나 오버헤드가 없다.
+- 플로우 안에서 새로운 코루틴을 시작해야 하는 경우에만 채널 플로우를 선택하라. 그 외에는 일반적인 콜드 플로우를 사용하라.
+
+### 16.3 핫 플로우
+- 각 수집자가 플로우 로직 실행을 독립적으로 촉발하는 대신, 여러 구독자(subscriber)라고 불리는 수집자들이 배출된 항목을 구독한다.
+- 시스템에서 이벤트나 상태 변경이 발생해서 수집자가 존재하는지 여부에 상관없이 값을 배출해야 하는 경우에 적합하다.
+- 핫 플로우는 항상 활성 상태이기 때문에 구독자의 유무 관계없이 배출이 발생할 수 있다.
+- 핫 플로우의 기본 구현
+  - 공유 플로우(shared flow): 값을 브로드캐스트하기 위해 사용된다.
+  - 상태 플로우(state flow): 상태를 전달하는 특별한 경우에 사용된다. (더 자주 사용된다.)
+#### 16.3.1 공유 플로우는 값을 구독자에게 브로드캐스트한다.
+- 공유 플로우는 구독자 존재 여부에 상관없이 배출이 발생하는 브로드캐스트 방식으로 작동
+- 원소가 공유 플로우에 배출되면 플로우를 수집하고 있는 모든 구독자가 해당 원소를 수신한다.
+- 공유 플로우는 보통 컨테이너 클래스 안에 선언된다.
+```kotlin 
+class RadioStation {
+    private val _messageFlow = MutableSharedFlow<Int>()
+    val messageFlow = _messageFlow.asSharedFlow()
+ 
+    fun beginBroadcasting(scope: CoroutineScope) {
+        scope.launch {
+            while(true) {
+                delay(500.milliseconds)
+                val number = Random.nextInt(0..10)
+                log("Emitting $number!")
+                _messageFlow.emit(number)
+            }
+        }
+    }
+}
+
+fun main(): Unit = runBlocking {
+   val radioStation = RadioStation()
+   radioStation.beginBroadcasting(this)
+   delay(600.milliseconds)
+   radioStation.messageFlow.collect {
+       log("A collecting $it!")
+   }
+}
+ 
+// 611 [main @coroutine#2] Emitting 8!
+// 1129 [main @coroutine#2] Emitting 9!
+// 1131 [main @coroutine#1] A collecting 9!
+// 1647 [main @coroutine#2] Emitting 1!
+// 1647 [main @coroutine#1] A collecting 1!
+```
+- 핫 플로우는 콜드 플로우와 다르게 플로우 빌더가 아닌 가변적인 플로우에 대한 참조(`MutableSharedFlow`)를 얻는다.
+  - 배출이 구독자 유무와 관계없으므로 실제 배출을 수행하는 코루틴을 시작해야 한다.
+  - 별다른 어려움 없이 여러 코루틴에서 가변 공유 플로우에 값을 배출할 수 있다.
+- 구독자를 추가하는 것은 콜드 플로우와 동일하게 `collect`를 호출한다.
+  - 배출이 발생할 때마다 제공한 람다가 실행된다.
+  - 구독 시작 이후에 배출된 값만 수신한다.
