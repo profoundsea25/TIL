@@ -1810,3 +1810,44 @@ fun main() {
    // JO jo MAY may SUE sue
 }
 ```
+#### 17.2.2 `take`나 관련 연산자는 플로우를 취소할 수 있다.
+- `take`, `takeWhile` 등의 함수는 연산자가 지정한 조건이 더 이상 유효하지 않을 때 업스트림 플로우가 취소된다. (더 이상 원소가 배출되지 않는다.)
+#### 17.2.3 플로우의 각 단계 후킹: `onStart`, `onEach`, `onCompletion`, `onEmpty`
+- `onCompletion`: 플로우가 정상 종료되거나, 취소되거나, 예외로 종료된 후에 호출되는 람다를 지정
+- `onStart`: 플로우의 수집이 시작될 때 첫 번째 배출이 일어나기 전에 실행
+- `onEach`: 업스트림 플로우에서 배출된 각 원소에 대해 작업을 수행한 후 이를 다운스트림 플로우에 전달
+- `onEmpty`: 원소를 배출하지 않고 종료될 떄, 로직을 추가로 수행하거나 기본값을 제공
+```kotlin
+fun main() {
+    flow
+       .onEmpty {
+           println("Nothing - emitting default value!")
+           emit(0)
+       }
+       .onStart {
+           println("Starting!")
+       }
+       .onEach {
+           println("On $it!")
+       }
+       .onCompletion {
+           println("Done!")
+       }
+       .collect()
+
+   runBlocking {
+       process(flowOf(1, 2, 3))
+       // Starting!
+       // On 1!
+       // On 2!
+       // On 3!
+       // Done!
+       process(flowOf())
+       // Starting!
+       // Nothing - emitting default value!
+       // On 0!
+       // Done!
+   }
+}
+```
+- `onEmpty`가 `onEach`보다 뒤에 선언되면 `onEach`만 실행되고 `onEmpty`는 실행되지 않는다.
