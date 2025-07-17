@@ -1591,7 +1591,7 @@ fun main() = runBlocking {
 - 코드가 모든 값을 계산할 때까지 기다릴 필요가 없다. 값이 계산되자마자 이를 사용 가능한 추상화가 플로우의 핵심 개념이다.
 #### 16.1.2 코틀린 플로우의 여러 유형
 - 콜드 플로우: 비동기 데이터 스트림. 값이 실제로 소비되기 시작할 때만 값을 배출한다.
-- 핫 스트림: 값이 실제로 소비되고 있는지와 상관없이 값을 독립적으로 배출하며, 브로드캐스트 방식으로 동작한다.
+- 핫 플로우: 값이 실제로 소비되고 있는지와 상관없이 값을 독립적으로 배출하며, 브로드캐스트 방식으로 동작한다.
 
 ### 16.2 콜드 플로우
 #### 16.2.1 `flow` 빌더 함수를 사용해 콜드 플로우 생성
@@ -1851,3 +1851,77 @@ fun main() {
 }
 ```
 - `onEmpty`가 `onEach`보다 뒤에 선언되면 `onEach`만 실행되고 `onEmpty`는 실행되지 않는다.
+#### 17.2.4 다운스트림 연산자와 수집자를 위한 원소 버퍼링: `buffer` 연산자
+- `buffer` 연산자는 버퍼를 추가해서 다운스트림 플로우가 이미 배출된 원소를 처리할 떄도 업스트림 플로우가 원소를 배출할 수 있게 해준다.
+  - 이로써 시스템 처리량을 늘릴 수 있다.
+```kotlin
+fun main() {
+   val ids = getAllUserIds()
+   runBlocking {
+       ids
+           .buffer(3)
+           .map { getProfileFromNetwork(it) }
+           .collect { log("Got $it") }
+   }
+}
+
+// 304 [main @coroutine#2] Emitting!
+// 525 [main @coroutine#2] Emitting!
+// 796 [main @coroutine#2] Emitting!
+// 2373 [main @coroutine#1] Got Profile[0]
+// 4388 [main @coroutine#1] Got Profile[1]
+// 6461 [main @coroutine#1] Got Profile[2]
+```
+- `onBufferOverflow` 파라미터를 통해 버퍼 용량이 초과될 때 어떤 일이 발생할지 지정할 수 있다.
+  - 생산자를 대기시키거나(`SUSPEND`), 버퍼에서 가장 오래된 값을 버리거나(`DROP_OLDEST`), 추가 중인 마지막 값을 버릴 수 있다.(`DROP_LATEST`)
+
+#### 17.2.5 중간값을 버리는 연산자: `conflate` 연산자
+- `conflate` 연산자를 통해 수집자가 바쁜 동안 배출된 항목을 그냥 버릴 수 있다.
+```kotlin
+    runBlocking {
+       val temps = getTemperatures()
+       temps
+           .onEach {
+               log("Read $it from sensor")
+           }
+           .conflate()
+           .collect {
+               log("Collected $it")
+               delay(1.seconds)
+           }
+   }
+}
+
+// 43 [main @coroutine#2] Read 20 from sensor
+// 51 [main @coroutine#1] Collected 20
+// 558 [main @coroutine#2] Read -10 from sensor
+// 1078 [main @coroutine#2] Read 3 from sensor
+// 1294 [main @coroutine#1] Collected 3
+// 1579 [main @coroutine#2] Read 13 from sensor
+// 2153 [main @coroutine#2] Read 26 from sensor
+// 2556 [main @coroutine#1] Collected 26
+```
+#### 17.2.6 일정 시간 동안 값을 필터링하는 연산자: `debounce` 연산자
+- `debounce` 연산자를 사용해 업스트림에서 원소가 배출되지 않은 상태로 정해진 타임아웃 시간이 지나야만 항목을 다운스트림 플로우로 배출한다.
+```kotlin
+val searchQuery = flow {
+   emit("K")
+   delay(100.milliseconds)
+   emit("Ko")
+   delay(200.milliseconds)
+   emit("Kotl")
+   delay(500.milliseconds)
+   emit("Kotlin")
+}
+
+fun main() = runBlocking {
+   searchQuery
+       .debounce(250.milliseconds)
+       .collect {
+           log("Searching for $it")
+       }
+}
+
+// 644 [main @coroutine#1] Searching for Kotl
+// 876 [main @coroutine#1] Searching for Kotlin
+```
