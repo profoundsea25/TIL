@@ -1925,3 +1925,60 @@ fun main() = runBlocking {
 // 644 [main @coroutine#1] Searching for Kotl
 // 876 [main @coroutine#1] Searching for Kotlin
 ```
+#### 17.2.7 플로우가 실행되는 코루틴 콘텍스트 바꾸기: `flowOn` 연산자
+- 코루틴 콘텍스트가 플로우 로직이 실행되는 위치를 결정한다.
+  - 기본적으로 수집은 `collect`가 호출된 콘텍스트에서 실행된다.
+- `flowOn`은 `withContext` 함수와 비슷하게 코루틴 컨텍스트를 조정한다.
+  - 처리 파이프라인 일부를 다른 디스패처나 다른 코루틴 컨텍스트에서 실행하게 만든다.
+  - `flowOn` 연산자는 업스트림 플로우의 디스패처에만 영향을 미친다.
+  - 다운스트림 플로우는 영향 받지 않는다.
+```kotlin
+runBlocking {
+   flowOf(1)
+	   .onEach { log("A") }
+	   .flowOn(Dispatchers.Default)
+	   .onEach { log("B") }
+	   .flowOn(Dispatchers.IO)
+	   .onEach { log("C") }
+	   .collect()
+}
+
+// 36 [DefaultDispatcher-worker-3 @coroutine#3] A
+// 44 [DefaultDispatcher-worker-1 @coroutine#2] B
+// 44 [main @coroutine#1] C
+```
+
+### 17.3 커스텀 중간 연산자 만들기
+- 중간 연산자는 동시에 수집자와 생산자 역할을 한다.
+  - 업스트림 플로우에서 원소를 수집한다. (`collect`)
+  - 이를 변환하거나 부수 효과를 수행하거나 사용자가 정의한 동작을 수행하고 다운스트림 플로우에 새 원소를 배출한다. (`flow`)
+  - 플로우 빌더 안에서만 업스트림 플로우에 대해 `collect`를 호출할 수 있으므로 연산자는 여전히 콜드 상태로 유지된다.
+```kotlin
+fun Flow<Double>.averageOfLast(n: Int): Flow<Double> =
+   flow {
+       val numbers = mutableListOf<Double>()
+       collect {
+           if (numbers.size >= n) {
+               numbers.removeFirst()
+           }
+           numbers.add(it)
+           emit(numbers.average())
+       }
+   }
+
+fun main() = runBlocking {
+   flowOf(1.0, 2.0, 30.0, 121.0)
+       .averageOfLast(3)
+       .collect {
+           print("$it ")
+       }
+}
+// 1.0 1.5 11.0 51.0
+```
+
+### 17.4 최종 연산자는 업스트림 플로우를 실행하고 값을 계산한다
+- 최종 연산자는 단일 값이나 값의 컬렉션을 계산하거나, 플로우의 실행을 촉발시켜 지정된 연산과 부수 효과를 수행한다.
+- 업스트림 플로우의 실행을 담당하기 때문에 항상 일시 중단 함수다.
+
+
+## 18. 오류 처리와 테스트
