@@ -196,3 +196,18 @@ llm.invoke('do something')
   - 체인은 작동 순서가 하드코딩되어 있지만, 에이전트는 올바른 순서로 올바른 작동을 계획하고 실행하는 것을 목표로 한다.
 
 ## 06. 대화형 애플리케이션 구축
+### 6.1 대화형 애플리케이션 실행하기 (LangChain)
+- `SystemMessage`: LLM에 제공하는 지침
+- `HumanMessage`: 사용자의 입력 프롬프트
+- `ConversationBufferMemory`같은 메모리 기능을 사용하면 사용자와 대화 내역을 LLM이 어느 정도 기억할 수 있다. (`langchain.memory`)
+- `ConversationalRetrievalChain`을 사용해 비모수적 지식(벡터 DB 등)을 추가할 수 있다.
+- `langchain.agents.agent_toolkits`의 `create_conversational_retrieval_agent` 함수를 통해 에이전트를 만들 수 있다.
+  - `create_retriever_tool`로 tool을 생성하고 이 반환값을 등록할 수 있다.
+
+### 6.2 스트림릿으로 프론트엔드 개발하기
+- `Streamlit`은 웹 앱을 만들고 공유할 수 있는 파이썬 라이브러리
+  - 간단한 명령어롤 사용해 시각적 요소(차트, 위젯, 표)를 생성할 수 있다.
+  - 랭체인과 통합됨.
+- 파이프라인의 출력을 사용자 친화적으로 볼 수 있음.
+
+## 07. LLM을 사용한 검색 및 추천 엔진
