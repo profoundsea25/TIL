@@ -2014,3 +2014,47 @@ fun main() = runBlocking {
 - 보통 슈퍼바이저는 애플리케이션에서 코루틴 계층의 위쪽에 위치하는 경우가 많다.
 
 ### 18.3 `CoroutineExceptionHandler`:  예외 처리를 위한 마지막 수단
+- 예외가 슈퍼바이저에 도달하거나, 루트 코루틴에 도달하면 예외는 더 이상 전파되지 않는다.
+  - 이때 처리되지 않은 예외는 `CoroutineExceptionHandler`에게 전달된다.
+  - 이 핸들러는 코루틴 컨텍스트의 일부다.
+  - 코루틴 컨텍스트에 예외 핸들러가 없다면 시스템 전역 예외 핸들러로 전달된다.
+- `CoroutineExceptionHandler`를 코루틴 컨텍스트에 제공하여 처리되지 않은 예외를 처리하는 동작을 커스텀할 수 있다.
+  - 핸들러는 처리되지 않은 예외와 코루틴 컨텍스트를 람다의 파라미터로 받는다.
+```kotlin
+class ComponentWithScope(dispatcher: CoroutineDispatcher = Dispatchers.Default) {
+   private val exceptionHandler = CoroutineExceptionHandler { _, e ->
+      println("[ERROR] ${e.message}")
+   }
+
+   private val scope = CoroutineScope(
+       SupervisorJob() + dispatcher + exceptionHandler
+   )
+
+   fun action() = scope.launch {
+      throw UnsupportedOperationException("Ouch!")
+   }
+}
+
+
+fun main() = runBlocking {
+   val supervisor = ComponentWithScope()
+   supervisor.action()
+   delay(1.seconds)
+}
+```
+- 루트 코루틴이 아닌 코루틴의 콘텍스트에 있는 핸들러는 결코 사용되지 않는다.
+#### 18.3.1 `CoroutineExceptionHandler`를 `launch`와 `async`에 적용할 때의 차이점
+- `CoroutineExceptionHandler`는 최상위 코루틴이 `launch`로 생성된 경우에만 호출된다.
+  - 즉, 최상위 코루틴이 `async`로 생성된 경우에는 핸들러가 호출되지 않는다.
+- 최상위 코루틴이 `async`로 호출되면 이 예외를 처리하는 책임은 `await`을 호출하는 `Deferred`의 소비자에게 있다.
+  - `await` 호출을 try-catch 블록으로 감싸는 방식으로 예외를 처리할 수 있다.
+
+### 18.3 플로우에서의 예외 처리
+- 일반적으로 플로우에서 예외가 발생하면 `collect`에서 예외가 던져진다.
+  - `collect`를 try-catch로 감싸서 처리할 수 있다.
+#### 18.4.1 `catch` 연산자로 업스트림 예외 처리
+- `catch`는 더 복잡하고 긴 플로우 파이프라인에서 예외 처리를 더 쉽게 할 수 있도록 하는 중간 연산자다.
+  - 이 함수의 람다 안에서 플로우에 발생한 예외에 접근할 수 있다.
+  - 취소 예외를 자동으로 인식한다. 취소가 발생한 경우에는 `catch` 블록이 호출되지 않는다.
+  - 스스로 값을 방출할 수도 있다. 예외를 오류 값으로 변환해 다운스트림 플로우에서 소비할 수도 있다.
+  - 플로우 처리 파이프라인 앞쪽(업스트림)에서 발생한 예외들만 잡아낸다.
