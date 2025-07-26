@@ -2082,3 +2082,7 @@ fun main() = runBlocking {
 - `TestCoroutineSchedular`의 핵심 함수
   - `runCurrent`: 현재 실행하게 예약된 모든 코루틴을 실행
   - `advanceUntilIdle`: 예약된 모든 코루틴을 실행
+#### 18.5.2 터빈으로 플로우 테스트
+- 터빈(Turbine) 라이브러리: 플로우 기반 API 테스트
+  - 핵심 기능은 `test` 확장 함수.
+  - `test` 메서드는 새 코루틴을 실행하며 내부적으로 플로우를 수집한다.
