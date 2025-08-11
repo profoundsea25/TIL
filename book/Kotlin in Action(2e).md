@@ -125,6 +125,35 @@
   - 싱글터을 정의하거나,
   - 동반 객체(companion obejct) 선언
   - 객체 식(자바의 익명 내부 클래스 대신 사용)
+#### 싱글턴과 의존관계 주입
+- 객체(`object`)는 생성을 제어할 수 없고 생성자 파라미터를 지정할 수 없다.
+  - 따라서 시스템의 설정이 달라질 때 객체를 대체하거나 객체의 의존관계를 바꿀 수 없다.
+  - 그런 기능이 필요하다면, 일반 클래스와 의존관계 주입을 함께 사용해야 한다.
+#### 4.4.2 동반 객체: 팩토리 메서드와 정적 멤버가 들어갈 장소
+- 동반 객체(`companion object`)는 본래 클래스에 대응하는 클래스에 속한다.
+  - 따라서 해당 클래스의 인스턴스는 동반 객체의 멤버에 접근할 수 없다.
+  - 이것이 자바 정적(`static`) 멤버와 코틀린 동반 객체 멤버의 다른 점이다.
+- 동반 객체는 자신을 둘러싼 클래스의 모든 `private` 멤버에 접근할 수 있다.
+  - 그래서 동반 객체는 팩토리 패턴을 구현하기 가장 적합한 위치이다.
+#### 4.4.3 동반 객체를 일반 객체처럼 사용
+- 동반 객체가 어떤 인터페이스를 상속받은 경우, 그 동반 객체를 감싼 클래스를 인자로 넘길 수 있다.
+```kotlin
+interface JSONFactory<T> {
+	fun fromJSON(text: String): T
+}
+
+class Person(val name: String) {
+	companion object : JSONFactory<Person> {
+		override fun fromJSON(text: String): Person = // ...
+	}
+}
+
+fun <T> loadFromJSON(factory: JSONFactory<T>): T {
+	// ...
+}
+
+loadFromJSON(Person) // 동반 객체의 인스턴스를 함수에 넘길 수 있다.
+```
 
 
 ## 5. 람다를 사용한 프로그래밍
