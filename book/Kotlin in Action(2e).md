@@ -155,6 +155,12 @@ fun <T> loadFromJSON(factory: JSONFactory<T>): T {
 loadFromJSON(Person) // 동반 객체의 인스턴스를 함수에 넘길 수 있다.
 ```
 
+## 4.5 부가 비용 없이 타입 안전성 추가: 인라인 클래스
+- 인라인 클래스를 사용하면 성능을 희생하지 않고 타입 안전성을 얻을 수 있다.
+- `value class`로 클래스를 선언하고, `@JvmInline` 어노테이션을 붙일 수 있다.
+  - ex. Int지만 구분하고 싶을때 (`@JvmInline value class UsdCent(val amount: Int)`)
+  - 컴파일하면 `Int`로 처리됨. 개발할 때는 타입 안정성을 지킬 수 있음.
+
 
 ## 5. 람다를 사용한 프로그래밍
 
